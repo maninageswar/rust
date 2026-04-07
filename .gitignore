@@ -1,0 +1,12 @@
+target/
+.vscode/
+*.pdf
+rustlings/
+.DS_Store
+
+# Ignore everything in these folders, then un-ignore .rs files
+practice_problems/*
+!practice_problems/*.rs
+
+rough/*
+!rough/*.rs
