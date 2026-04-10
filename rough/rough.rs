@@ -71,9 +71,41 @@
 //     println!("r1 is {}",r1)
 // }
 
-fn main() {
-    let mut s = String::from("hello");
-    let r1 = &s;
-    let r2 = &mut s;
-    println!("{}",r1);
-}
+// fn main() {
+//     let mut s = String::from("hello");
+//     let r1 = &s;
+//     let r2 = &mut s;
+//     println!("{}",r1);
+// }
+
+// fn main() {
+//     #[derive(Debug)]
+//     enum IpAddr {
+//         V4(u8, u8, u8, u8),
+//         V6(String),
+//     }
+
+//     let home: IpAddr = IpAddr::V4(127, 0, 0, 1);
+//     let loopback: IpAddr = IpAddr::V6(String::from("::1"));
+//     println!("Ip address of home is {:#?}", home);
+// }
+
+// fn main() {
+//     #[derive(Debug)]
+//     struct Ipv4Addr {
+//         // --snip--
+//     }
+//     #[derive(Debug)]
+//     struct Ipv6Addr {
+//         // --snip--
+//     }
+
+//     #[derive(Debug)]
+//     enum IpAddr {
+//         V4(Ipv4Addr),
+//         V6(Ipv6Addr),
+//     }
+//     let home: IpAddr = IpAddr::V4((127, 0, 0, 1));
+//     let loopback: IpAddr = IpAddr::V6(String::from("::1"));
+//     println!("Ip address of home is {:#?}", home);
+// }
