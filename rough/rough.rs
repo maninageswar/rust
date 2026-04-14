@@ -44,7 +44,7 @@
 // }
 
 // fn show_name(n: &String) {
-    
+
 //     println!("the name super is {}",n);
 // }
 
@@ -58,7 +58,6 @@
 // fn increase_x(x: &mut u32) {
 //     *x = *x + 1;
 // }
-
 
 // important run the coode and understand the errors
 
@@ -109,3 +108,52 @@
 //     let loopback: IpAddr = IpAddr::V6(String::from("::1"));
 //     println!("Ip address of home is {:#?}", home);
 // }
+
+// fn main() {
+//     let x: String = String::from("hello world");
+//     let y: &String = &x;
+//     println!("the value of y is {}",y);
+//     println!("the value of y is {:p}",y);
+// }
+
+// fn main() {
+//     let value = get_value();
+//     println!("the value is {}",value);
+// }
+
+// fn get_value() -> &i32 {
+//     let x = 10;
+//     &x
+// }
+
+// fn main() {
+//     let mut x: String = String::from("hello");
+//     let mut y = &mut x;
+//     let z = &mut y;
+//     z.push_str(", world!");
+//     println!("the value of x is {}",x);
+//     println!("the value of y is {}",y);
+//     // println!("the value of z is {}",z);
+// }
+
+// struct Person {
+//     name: String,
+// }
+
+// fn main() {
+//     let p = Person {
+//         name: String::from("Nathan"),
+//     };
+
+//     let r = &p; // borrow p
+
+//     let name = r.name; // ❌ ERROR: cannot move out of borrowed content
+
+//     println!("{}", name);
+// }
+
+fn main() {
+    let s = String::from("hello");
+    let r = &s;
+    let x = *r;
+}
