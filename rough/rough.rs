@@ -136,6 +136,12 @@
 //     // println!("the value of z is {}",z);
 // }
 
+// fn main() {
+//     let s = String::from("hello");
+//     let r = &s;
+//     let x = *r;
+// }
+
 // struct Person {
 //     name: String,
 // }
@@ -147,13 +153,206 @@
 
 //     let r = &p; // borrow p
 
-//     let name = r.name; // ❌ ERROR: cannot move out of borrowed content
+//     let name = r.name;
 
 //     println!("{}", name);
 // }
 
+// fn main() {
+//     let num: i32 = 121;
+//     // let s = num.to_string();
+
+//     println!("is palindrome{}", palindrome(num));
+// }
+
+// fn palindrome(x: i32) -> bool {
+//     // let s = x.to_string();
+//     let t : String = x.to_string().chars().rev().collect();
+//     // if s == t {
+//     //    true
+//     // } else {
+//     //     false
+//     // }
+//     t == x.to_string()
+// }
+
+// fn main() {
+//     let roman = String::from("VI");
+//     // if roman == "VII" || roman == "VI" {
+//     //     println!("ther are equal");
+//     // }
+//     for i in roman.chars() {
+//         println!("i {}",i);
+//     }
+// }
+
+// fn main() {
+//     let n1: u16 = 4;
+//     let n2: i32 = 8;
+//     let sum = n1 as i32 + n2;
+//     println!("the sum is {}",sum);
+// }
+
+// fn main() {
+//     let roman = String::from("some chepri");
+//     let chars: Vec<char> = roman.chars().collect();
+//     // for i in 0..chars.len()-1 {
+//     //     println!("i {}", chars[i]);
+//     // }
+//     println!("i {}", chars[chars.len()-1]);
+// }
+
+// fn main() {
+//     let a: String = String::from("hello");
+//     let a_ref: &String = &a;
+//     let b: String = String::from("hello");
+//     let b_ref: &String = &b;
+//     if a_ref == b_ref {
+//         println!("ref's are equal");
+//     } else {
+//         println!("ref's are not equal");
+//     }
+// }
+
+// fn main() {
+//     let x_arr: [u8; 5] = [1, 2, 3, 4, 5];
+//     let y_arr: &[u8] = &x_arr;
+// }
+
+// fn main() {
+//     let s1 = String::from("hello");
+//     let s2 = s1;
+//     println!("name1 is {}",s2);
+// }
+
+// fn main() {
+//     let mut s: String = String::from("hello");
+//     modify_string(&mut s);
+//     append_symbols(&mut s);
+//     println!("the string after modify is {}", s);
+// }
+
+// fn modify_string(s: &mut String) {
+//     s.push_str("world");
+// }
+
+// fn append_symbols(s: &mut String) {
+//     s.push_str("!!!!");
+// }
+
+// fn main() {
+//     let mut s: String = String::from("hello");
+//     modify_string(&mut s);
+//     append_symbols(&mut s);
+//     println!("the string after modify is {}", s);
+// }
+// fn modify_string(s: &mut String) {
+//     s.push_str("world");
+// }
+// fn append_symbols(s: &mut String) {
+//     s.push_str("!!!!");
+// }
+
+// fn main() {
+//     let mut s = String::from("hello world");
+
+//     let word = first_word(&s);
+
+//     let x = word;
+
+//     s.clear();
+
+//     println!("{}", x);
+// }
+
+// fn first_word(s: &String) -> &str {
+//     let bytes = s.as_bytes();
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return &s[..i];
+//         }
+//     }
+//     &s[..]
+// }
+
+// fn print_str(s: &String) {
+//     println!("{}", s);
+// }
+
+// fn main() {
+//     let mut s = String::from("hello");
+
+//     let r1 = &s;
+
+//     let r2 = &mut s;
+
+//     print_str(r1);
+// }
+
+// fn main() {
+//     let mut x = vec![1, 2, 3];
+//     x.push(4); // -> x is mutable borrow
+//     let last = x.last().unwrap(); // > here last holds immutable borrow
+//     println!("the last element is {:?}", last)
+// }
+
+// main.rs
+// mod utils {
+//     pub mod math {
+//         pub fn add(a: i32, b: i32) -> i32 {
+//             a + b
+//         }
+//     }
+// }
+
+// fn main() {
+//     let result = utils::math::add(2, 3);
+//     println!("{}", result);
+// }
+
+// struct Item {
+//     name: String,
+//     price: f32,
+// }
+
+// impl Item {
+//     fn print_item_name(self: &Self) {
+//         println!("the name of the item is {}", self.name);
+//     }
+// }
+
+// fn main() {
+//     let item1 = Item {
+//         name: String::from("apple"),
+//         price: 10.0,
+//     };
+
+//     let item2 = &item1;
+
+//     let item_name = &item2.name;
+
+//     item2.print_item_name();
+
+//     println!("the price of the item is {}", item2.price);
+//     println!("the price of the item is {}", item_name);
+// }
+
+struct Item {
+    name: String,
+    price: f32,
+}
+
 fn main() {
-    let s = String::from("hello");
-    let r = &s;
-    let x = *r;
+    let mut item1 = Item {
+        name: String::from("hello"),
+        price: 10.0,
+    };
+
+    let item2 = &mut item1;
+
+    item2.name.push_str("world");
+    item2.price = 20.0;
+
+    println!("the item name is {}", item1.name);
+    println!("the item price is {}", item1.price);
 }
