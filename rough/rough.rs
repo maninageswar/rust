@@ -337,22 +337,43 @@
 //     println!("the price of the item is {}", item_name);
 // }
 
-struct Item {
-    name: String,
-    price: f32,
+// struct Item {
+//     name: String,
+//     price: f32,
+// }
+
+// impl Item {
+//     fn test() {
+//         println!("hello")
+//     }
+// }
+
+// fn main() {
+//     let mut item1 = Item {
+//         name: String::from("hello"),
+//         price: 10.0,
+//     };
+
+//     Item::test()
+// }
+
+struct Car;
+
+impl Car {
+    fn get_purpose()  {
+        println!("transport");
+    }
+
+    fn get_color(&self) -> &'static str {
+        "red"
+    }
 }
 
 fn main() {
-    let mut item1 = Item {
-        name: String::from("hello"),
-        price: 10.0,
-    };
+    let car1 = Car;
 
-    let item2 = &mut item1;
+    println!("the color of the car1 is {}", car1.get_color());
 
-    item2.name.push_str("world");
-    item2.price = 20.0;
-
-    println!("the item name is {}", item1.name);
-    println!("the item price is {}", item1.price);
+    car1.get_purpose();
 }
+
