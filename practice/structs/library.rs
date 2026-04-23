@@ -46,7 +46,7 @@ impl Library {
         }
     }
 
-    fn list_of_avaliable_of_books(&self) -> Vec<&Book> {
+    fn list_of_avaliable_books(&self) -> Vec<&Book> {
         let mut avaliable_books_list = Vec::<&Book>::new();
         for book in &self.books {
             if book.is_avaliable {
@@ -121,7 +121,7 @@ fn main() {
     println!("title5 borrowed"); // title5 borrowed
     library1.borrow_a_book("title5");
 
-    println!("list of avaliable books are {:#?}", library1.list_of_avaliable_of_books());
+    println!("list of avaliable books are {:#?}", library1.list_of_avaliable_books());
     
     // find book4
     find_book_in_library(&library1, "title4");
