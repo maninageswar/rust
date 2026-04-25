@@ -357,23 +357,54 @@
 //     Item::test()
 // }
 
-struct Car;
+// struct Car;
 
-impl Car {
-    fn get_purpose()  {
-        println!("transport");
-    }
+// impl Car {
+//     fn get_purpose()  {
+//         println!("transport");
+//     }
 
-    fn get_color(&self) -> &'static str {
-        "red"
-    }
-}
+//     fn get_color(&self) -> &'static str {
+//         "red"
+//     }
+// }
+
+// fn main() {
+//     let car1 = Car;
+
+//     println!("the color of the car1 is {}", car1.get_color());
+
+//     car1.get_purpose();
+// }
+
+
+// fn main() {
+//     let v = vec![
+//         String::from("superman"),
+//         String::from("batman"),
+//         String::from("ironman"),
+//     ];
+
+//     let third = v[2];
+
+//     // let third_copy = v[2];
+
+//     println!("the vector is {:?}",v);
+// }
+
+// fn main() {
+//     let mut v = vec![100, 32, 57];
+//     for i in &mut v {
+//         v.push(9)
+//     }
+// }
 
 fn main() {
-    let car1 = Car;
-
-    println!("the color of the car1 is {}", car1.get_color());
-
-    car1.get_purpose();
+    let string1 = String::from("flower");
+    let string_length = string1.len();
+    for word_length in (1..string_length+1).rev() {
+        let word = &string1[..word_length];
+        println!("the word is {}",word);
+    }
+    
 }
-
