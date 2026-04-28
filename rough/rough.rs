@@ -399,12 +399,45 @@
 //     }
 // }
 
-fn main() {
-    let string1 = String::from("flower");
-    let string_length = string1.len();
-    for word_length in (1..string_length+1).rev() {
-        let word = &string1[..word_length];
-        println!("the word is {}",word);
-    }
+// fn main() {
+//     let string1 = String::from("flower");
+//     let string_length = string1.len();
+//     for word_length in (1..string_length+1).rev() {
+//         let word = &string1[..word_length];
+//         println!("the word is {}",word);
+//     }
     
+// }
+
+// fn main() {
+//     let v: Vec<i32> = Vec::from([1, 2, 3, 4]);
+//     let does_not_exist = &v[100];
+//     println!("does not exits {}", does_not_exist);
+// }
+
+// fn main() {
+//     let s1 = String::from("tic");
+//     let s2 = String::from("tac");
+//     let s3 = String::from("toe");
+
+//     let s = format!("{s1}-{s2}-{s3}");
+//     println!("s is {}", s);
+//     println!("s1 is {}", s1);
+//     println!("s2 is {}", s2);
+//     println!("s3 is {}", s3);
+// }
+
+// fn main() {
+//     let s = "Здравствуйте";
+//     let a = s.chars().nth(1);
+//     println!("a is {:?}",a);
+// }
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Yellow"), 50);
+    scores.insert(String::from("Blue"), 10);
+    println!("score of blue team is {}", scores["Blue"]);
 }
