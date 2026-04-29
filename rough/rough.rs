@@ -419,12 +419,20 @@
 //     let s1 = String::from("tic");
 //     let s2 = String::from("tac");
 //     let s3 = String::from("toe");
+//     let full_string = String::from("tic-tac-toe");
 
 //     let s = format!("{s1}-{s2}-{s3}");
+//     drop(s2);
 //     println!("s is {}", s);
-//     println!("s1 is {}", s1);
-//     println!("s2 is {}", s2);
-//     println!("s3 is {}", s3);
+//     // println!("s1 is {}", s1);
+//     // println!("s2 is {}", s2);
+//     // println!("s3 is {}", s3);
+
+    
+
+//     if s == full_string {
+//         println!("both strings are equal");
+//     }
 // }
 
 // fn main() {
@@ -433,11 +441,42 @@
 //     println!("a is {:?}",a);
 // }
 
-use std::collections::HashMap;
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut scores = HashMap::new();
+//     scores.insert(String::from("Yellow"), 50);
+//     scores.insert(String::from("Blue"), 10);
+//     println!("score of blue team is {}", scores["Blue"]);
+// }
+
+// fn main() {
+//     let word1 = String::from("super");
+//     println!("the word is {}", can_i_print(&word1));
+// }
+
+// fn can_i_print(word: &str) -> String {
+//     if word == "super" {
+//         String::from("super")
+//     } else {
+//         String::from("hello")
+//     }
+// }
+
+// fn main() {
+//     let word1 = String::from("hello");
+//     let word_ref = &word1;
+//     let mode = Some(word_ref);
+//     if let Some(&word) = mode {
+//         println!("The word is {}", word);
+//     }
+// }
 
 fn main() {
-    let mut scores = HashMap::new();
-    scores.insert(String::from("Yellow"), 50);
-    scores.insert(String::from("Blue"), 10);
-    println!("score of blue team is {}", scores["Blue"]);
+    let v = String::from("hello");
+
+    let first = &v;
+
+    let moved = *first;
+    println!("{}", moved);
 }
