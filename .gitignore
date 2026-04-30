@@ -1,6 +1,7 @@
 target/
 .vscode/
 *.pdf
+!rust_cheat_sheet.pdf
 rustlings/
 .DS_Store
 
