@@ -22,46 +22,34 @@ I decided to learn Rust primarily through reading resources rather than video co
 
 ### 📚 Reading Resources
 
-| Resource |
-| --- |
-| [The Rust Book](https://doc.rust-lang.org/book/) |
-| [Brown University Rust Book](https://rust-book.cs.brown.edu/) |
-| [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html) |
-| [The Rustonomicon](https://doc.rust-lang.org/nomicon/vec/vec-layout.html) |
-| [A Half Hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust#types-are-namespaces-too) |
-| [Microsoft Rust Learning](https://rust.learningz.xyz/) |
-| [Rust Cheat Sheet](./rust_cheat_sheet.pdf) |
+- [The Rust Book](https://doc.rust-lang.org/book/)
+- [Brown University Rust Book](https://rust-book.cs.brown.edu/)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/vec/vec-layout.html)
+- [A Half Hour to Learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust#types-are-namespaces-too)
+- [Microsoft Rust Learning](https://rust.learningz.xyz/)
+- [Rust Cheat Sheet](./rust_cheat_sheet.pdf)
 
 ### 🧠 Quizzes
 
-| Quiz |
-| --- |
-| [Rust Quiz 1](https://dtolnay.github.io/rust-quiz/1) |
-| [Rust Quiz 2](https://www.systemsarchitect.io/quiz/category/rust) |
+- [Rust Quiz 1](https://dtolnay.github.io/rust-quiz/1)
+- [Rust Quiz 2](https://www.systemsarchitect.io/quiz/category/rust)
 
 ### 🛠 Practice Exercises
 
-| Exercise Resource |
-| --- |
-| [Rustlings Online](https://www.rustfinity.com/rustlings) |
-| [Rust Coding Practice on Exercism](https://exercism.org/tracks/rust) |
-| [100 Rust Projects to Practice](https://rust.learningz.xyz/books/100-rust-projects) |
+- [Rustlings Online](https://www.rustfinity.com/rustlings)
+- [Rust Coding Practice on Exercism](https://exercism.org/tracks/rust)
+- [100 Rust Projects to Practice](https://rust.learningz.xyz/books/100-rust-projects)
 
 ### 👥 Community
 
-| Community Resource |
-| --- |
-| [Rust Language Forum](https://users.rust-lang.org/) |
+- [Rust Language Forum](https://users.rust-lang.org/)
 
 ### ✅ Skill Check
 
-| Skill Check Resource |
-| --- |
-| [HackerRank Rust Skill Check](https://www.hackerrank.com/skills-directory/rust_basic) |
+- [HackerRank Rust Skill Check](https://www.hackerrank.com/skills-directory/rust_basic)
 
 ### 🧪 Playground
 
-| Playground |
-| --- |
-| [Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024) |
+- [Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2024)
 
