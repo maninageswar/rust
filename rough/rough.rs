@@ -472,11 +472,21 @@
 //     }
 // }
 
+// fn main() {
+//     let v = String::from("hello");
+
+//     let first = &v;
+
+//     let moved = *first;
+//     println!("{}", moved);
+// }
+
+use std::collections::HashMap;
+
 fn main() {
-    let v = String::from("hello");
-
-    let first = &v;
-
-    let moved = *first;
-    println!("{}", moved);
+    let mut scores: HashMap<String, i32> = HashMap::new();
+    scores.insert(String::from("blue"),30);
+    scores.insert(String::from("red"),20);
+    println!("the score of the blue team is {}", scores["blue"]);
+    println!("{:#?}",scores);
 }
