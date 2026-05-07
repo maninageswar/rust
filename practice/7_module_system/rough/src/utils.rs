@@ -1,0 +1,3 @@
+fn creating_a_funtion_with_explicit_error_to_check_if_rust_will_ignore_if_this_file_is_not_used_in_anyother_file_with_keyword_mod() -> String {
+    return 2; // this function is returing integer but the signature says it should return a owned string. so it will be flagged as a compiler error only if this file is used with as a module(meaning use this file name along with mod keyword in any other file)
+}

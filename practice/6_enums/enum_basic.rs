@@ -10,31 +10,42 @@
 //     println!("Ip address of home is {:#?}", home);
 // }
 
-// fn main() {
-//     enum Message {
-//         Quite,
-//         Move {x: u8, y: u8},
-//         Write(String),
-//         ChangeColor(i32, i32, i32)
-//     }
+fn main() {
+    enum Message {
+        Quite,
+        Move {x: u8, y: u8},
+        Write(String),
+        ChangeColor(i32, i32, i32)
+    }
 
-//     impl Message {
-//         fn call(self: &Self) {
-//             // match self {
-//                 // Message::Write(s) => {
-//                 //     println!("the word to write is {}", s);
-//                 // }
-//                 // _ => {}
-//             // }
-//             if let Message::Write(s) = self {
-//                     println!("the word to write is {}",s);
-//                 }
-//         }
-//     }
+    impl Message {
+        fn call(self: &Self) {
+            // match self {
+                // Message::Write(s) => {
+                //     println!("the word to write is {}", s);
+                // }
+                // _ => {}
+            // }
+            if let Message::Write(s) = self {
+                    println!("the word to write is {}",s);
+                }
+        }
 
-//     let m: Message = Message::Write(String::from("hello"));
-//     m.call();
-// }
+        fn call_move(self: &Self) {
+            match self {
+                Message::Move {x , y} => {
+                    println!("the x and y are {}, {}", x, y);
+                },
+                _ => {},
+            }
+        }
+    }
+
+    let m: Message = Message::Write(String::from("hello"));
+    m.call();
+    let n: Message = Message::Move {x : 1, y : 1};
+    n.call_move();
+}
 
 // #[derive(Debug)]
 // enum UsState {
@@ -81,9 +92,9 @@
 //     println!("the number none is {:?}",none);
 // }
 
-fn main() {
-    let some_number = Some(5);
-    let some_char = Some('e');
+// fn main() {
+//     let some_number = Some(5);
+//     let some_char = Some('e');
 
-    let absent_number: Option<i32> = None;
-}
+//     let absent_number: Option<i32> = None;
+// }
