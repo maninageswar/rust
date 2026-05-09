@@ -108,6 +108,8 @@ fn main() {
     library1.add_a_book(book4);
     library1.add_a_book(book5);
 
+    println!("library1 {:#?}", library1);
+
     println!("title1 borrowed"); // title1 borrowed
     library1.borrow_a_book("title1");
     check_if_book_is_avaliable(&library1, "title1");
