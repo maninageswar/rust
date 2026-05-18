@@ -27,13 +27,9 @@ impl Cart {
         self.items.retain(|item| item.name != name);
     }
 
-    fn total_items_in_cart(&self) -> usize {
+    fn number_of_items_in_the_cart(&self) -> usize {
         self.items.len()
     }
-
-    // fn most_expensive_item(&self) -> Item {
-
-    // }
 }
 
 fn main() {
@@ -64,6 +60,6 @@ fn main() {
     user1_cart.remove_item_by_name("orange");
     println!("the total price of all the items in user's cart after removing a item is {}",user1_cart.get_the_total_price_of_items());
 
-    // total number of items in the cart
-    println!("the number of items in the cart is {}", user1_cart.total_items_in_cart());
+    // number of items in the cart
+    println!("the number of items in the cart is {}", user1_cart.number_of_items_in_the_cart());
 }

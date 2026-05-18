@@ -481,12 +481,43 @@
 //     println!("{}", moved);
 // }
 
-use std::collections::HashMap;
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut scores: HashMap<String, i32> = HashMap::new();
+//     scores.insert(String::from("blue"),30);
+//     scores.insert(String::from("red"),20);
+//     println!("the score of the blue team is {}", scores["blue"]);
+//     println!("{:#?}",scores);
+// }
+
+// fn main() {
+//     let mut s = String::from("hello");
+//     let Is = &s;
+//     let ms = &mut s;
+//     println!("the value is {}",Is);
+// }
+
+
+struct User {
+    name: String,
+    age: u32,
+}
 
 fn main() {
-    let mut scores: HashMap<String, i32> = HashMap::new();
-    scores.insert(String::from("blue"),30);
-    scores.insert(String::from("red"),20);
-    println!("the score of the blue team is {}", scores["blue"]);
-    println!("{:#?}",scores);
+    let mut user = User {
+        name: String::from("Nathan"),
+        age: 20,
+    };
+
+    let name_ref = &user.name;
+    let user_ref = &mut user;
+
+    user_ref.age += 1;
+    user_ref.name.push_str(" Kumar");
+
+    println!("{}", name_ref);
+
+    println!("{}", user_ref.age);
+    println!("{}", user_ref.name);
 }
