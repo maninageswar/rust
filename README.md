@@ -16,7 +16,7 @@ I decided to learn Rust primarily through reading resources rather than video co
 | [Chapter 2 to 6](https://chatgpt.com/c/69cb3c7d-78e4-8324-8c83-28c76d07aa7f) | [Chapter 8](https://chatgpt.com/c/69eb080d-17cc-8323-9a7e-74ba1c9aa5ea) |
 | [Chapter 3 to 6](https://chatgpt.com/c/69d494a0-df54-8321-872b-7d1afd891e7c) | [Chapter 9](https://chatgpt.com/c/69fc29fb-1a70-8321-a865-e9562534f6e0) |
 | [Chapter 4 to 6](https://chatgpt.com/c/69d4b13f-3270-8321-b2ce-9c1cc774f27a) | [recap 1 to 9](https://chatgpt.com/c/6a0738a5-adcc-8320-ac73-7edc9324d2f0) |
-| [Chapter 5 to 6](https://chatgpt.com/c/69dfad84-95ac-8320-9da0-8993b22f2974) | |
+| [Chapter 5 to 6](https://chatgpt.com/c/69dfad84-95ac-8320-9da0-8993b22f2974) | [Chapter 10](https://chatgpt.com/c/6a108418-2750-8322-a73f-3e7866425b76) |
 
 ## 🔗 Useful Rust Links
 

@@ -499,25 +499,137 @@
 // }
 
 
-struct User {
-    name: String,
-    age: u32,
-}
+// struct User {
+//     name: String,
+//     age: u32,
+// }
+
+// fn main() {
+//     let mut user = User {
+//         name: String::from("Nathan"),
+//         age: 20,
+//     };
+
+//     let name_ref = &user.name;
+//     let user_ref = &mut user;
+
+//     user_ref.age += 1;
+//     user_ref.name.push_str(" Kumar");
+
+//     println!("{}", name_ref);
+
+//     println!("{}", user_ref.age);
+//     println!("{}", user_ref.name);
+// }
+
+
+// fn main() {
+//     let v = vec![
+//         String::from("sai"),
+//         String::from("sri"),
+//         String::from("shankar"),
+//     ];
+
+//     let middle_name: &String = &v[1];
+//     println!("the middle name is {}", middle_name);
+
+//     let last_name: Option<&String> = v.get(2);
+//     match last_name {
+//         Option::Some(name) => { println!("the last name is {}", name); },
+//         Option::None => { println!("the index is out of range"); }
+//     }
+
+//     if let Some(name) = last_name {
+//         println!("the last name is {}", name);
+//     }
+// }
+
+// fn main() {
+//     let mut v = Vec::from([1, 2, 3, 4, 5]);
+//     let x = &v;
+
+//     println!("vec x is {:?}", x);
+
+//     for i in 6..=105 {
+//         v.push(i);
+//     }
+
+//     // println!("vec x is {:?}", x);
+// }
+
+// fn main() { 
+//     let mut v = vec![1, 2, 3, 4, 5]; 
+//     let x = &mut v; 
+//     println!("vex x before {:?}",x); 
+//     for i in 6..=105 { 
+//         x.push(i); 
+//     } 
+//     println!("vex v after {:?}",v); 
+// }
+
+// #[derive(Debug)]
+// struct User {
+//     id: u32,
+//     name: String,
+// }
+
+// fn main() {
+//     let mut v: Vec<&User> = Vec::new();
+//     {
+//         let u = User { id: 1, name: String::from("siri") };
+//         v.push(&u)
+//     }
+
+//     println!("the vector is {:#?}", v);
+// }
+
+// fn main() {
+//     let mut v = vec![1, 2, 3, 4, 5];
+//     let first = &v[0];
+//     v.push(6);
+//     println!("The first element is: {first}");
+// }
+
+// fn main() {
+//     let name = String::from("tarun");
+//     let ref_name = &name;
+//     drop(name);
+//     println!("the name is {}",ref_name);
+// }
+
+// fn main() {
+//     let mut name = String::from("tarun");
+//     let name_im_ref1 = &mut name;
+//     let name_im_ref2 = &mut name;
+//     // name_im_ref2.push_str("swamy");
+//     println!("the name via ref is {}",name_im_ref1);
+// }
+
+// fn main() {
+//     let s1 = String::from("Hello, ");
+//     let s2 = "world!";
+//     let s3 = s1 + s2; 
+//     println!("the s3 is {}", s3);
+//     println!("the s2 is {}", s2);
+//     println!("the first char is {}", &s1[..1]);
+//     println!("the first char is {:?}", s1.get(0..1).unwrap());
+// }
 
 fn main() {
-    let mut user = User {
-        name: String::from("Nathan"),
-        age: 20,
-    };
-
-    let name_ref = &user.name;
-    let user_ref = &mut user;
-
-    user_ref.age += 1;
-    user_ref.name.push_str(" Kumar");
-
-    println!("{}", name_ref);
-
-    println!("{}", user_ref.age);
-    println!("{}", user_ref.name);
+    let v: Vec<String> = vec![String::from("sai"), String::from("sri")];
+    let a = &v;
+    let b = &a[0];
+    let c = &a[0];
+    println!("the a is {:?}",b);
+    println!("the c is {}",c);
+    // println!("the a is {:?}",a[1]);
+    // println!("the a is {:?}",&a[1]);
 }
+
+// fn main() {
+//     let v: Vec<i32> = vec![1, 2, 3, 4];
+//     let a = &v;
+//     println!("the a is 1 {:?}",a[0]);
+//     println!("the a is 2 {:?}",&a[0]);
+// }
+
