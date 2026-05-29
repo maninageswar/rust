@@ -615,16 +615,16 @@
 //     println!("the first char is {:?}", s1.get(0..1).unwrap());
 // }
 
-fn main() {
-    let v: Vec<String> = vec![String::from("sai"), String::from("sri")];
-    let a = &v;
-    let b = &a[0];
-    let c = &a[0];
-    println!("the a is {:?}",b);
-    println!("the c is {}",c);
-    // println!("the a is {:?}",a[1]);
-    // println!("the a is {:?}",&a[1]);
-}
+// fn main() {
+//     let v: Vec<String> = vec![String::from("sai"), String::from("sri")];
+//     let a = &v;
+//     let b = &a[0];
+//     let c = &a[0];
+//     println!("the a is {:?}",b);
+//     println!("the c is {}",c);
+//     println!("the a is {:?}",a[1]);
+//     println!("the a is {:?}",&a[1]);
+// }
 
 // fn main() {
 //     let v: Vec<i32> = vec![1, 2, 3, 4];
@@ -632,4 +632,66 @@ fn main() {
 //     println!("the a is 1 {:?}",a[0]);
 //     println!("the a is 2 {:?}",&a[0]);
 // }
+
+// #[derive(Debug)]
+// struct Clock {
+//     hours: i32,
+//     minutes: i32,
+// }
+
+// impl Clock {
+//     fn new(hours: i32, minutes: i32) -> Self {
+//         Self {
+//             hours,
+//             minutes
+//         }
+//     }
+// }
+
+// fn main() {
+//     let c1: Clock = Clock::new(9, 54);
+//     println!("the time is {:?}", c1);
+// }
+
+// fn main() {
+//     for i in 1..3+1 {
+//         println!("{}", i);
+//     }
+//     println!("{}", -12 % 24)
+// }
+
+// fn main() {
+//     let s1: String = String::from("apple");
+//     let s2: String = String::from("zoo");
+//     if s1 > s2 {
+//         println!("{} is greater", s1);
+//     } else {
+//         println!("{} is greater",s2)
+//     }
+// }
+
+
+fn largest<T>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list);
+    println!("The largest number is {result}");
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list);
+    println!("The largest char is {result}");
+}
 
