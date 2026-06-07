@@ -695,10 +695,44 @@
 //     println!("The largest char is {result}");
 // }
 
-fn main<'a>() {
-    {
-        let s = String::from("hello");
-        let r: &'a String = &s;
+// fn main<'a>() {
+//     {
+//         let s = String::from("hello");
+//         let r: &'a String = &s;
+//     }
+// }
+
+// fn main() {
+//     let r;
+//     {
+//         let x = 10;
+//         r = &x;
+//     }
+//     println!("{r}");
+// }
+
+// fn main() {
+//     let x = 10;
+//     let r = &'a x;
+//     println!("{r}");
+// }
+
+fn longest<'a, 'b>(
+    x: &'a str,
+    y: &'b str,
+) -> &'b str { 
+    if x.len() > y.len() {
+        x
+    } else {
+        y
     }
 }
 
+fn main() {
+    let a = String::from("hello");
+    let b = String::from("world!!!");
+
+    let result = longest(&a, &b);
+
+    println!("{result}");
+}
