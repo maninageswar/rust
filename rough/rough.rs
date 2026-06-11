@@ -717,22 +717,108 @@
 //     println!("{r}");
 // }
 
-fn longest<'a, 'b>(
-    x: &'a str,
-    y: &'b str,
-) -> &'b str { 
-    if x.len() > y.len() {
-        x
-    } else {
-        y
+// fn longest<'a, 'b>(
+//     x: &'a str,
+//     y: &'b str,
+// ) -> &'b str { 
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+
+// fn main() {
+//     let a = String::from("hello");
+//     let b = String::from("world!!!");
+
+//     let result = longest(&a, &b);
+
+//     println!("{result}");
+// }
+
+// fn main() {
+//     let super_array: [&str; 5] = ["super"; 5];
+//     println!("the super array {:#?}", super_array);
+
+//     let mut months: [&str; 12] = ["January", "February", "March", "April", "May", "June", "July",
+//               "August", "September", "October", "November", "December"];
+    
+//     let first_quater: &[&str] = &months[0..3];
+//     println!("months that belong to first quater are {:#?}", first_quater);
+    
+// }
+
+// fn find_largest(list: &[i32]) -> &i32 {
+//     let mut largest_number: &i32 = &list[0];
+//     for number in list {
+//         if number > largest_number {
+//             largest_number = number
+//         }
+//     }
+//     largest_number
+// }
+
+// fn main() {
+//     let numbers: [i32; 8] = [1, 2, 3, 4, 5, 6, 7, 8];
+//     println!("the largest number in the array {:?} is {}", numbers, find_largest(&numbers));
+// }
+
+// use std::cmp::PartialOrd;
+
+// fn find_largest<T: PartialOrd>(list: &[T]) -> &T {
+//     let mut largest_number: &T = &list[0];
+//     for number in list {
+//         if number > largest_number {
+//             largest_number = number;
+//         }
+//     }
+//     largest_number
+// }
+
+// fn main() {
+//     let numbers: [i32; 8] = [1, 2, 3, 4, 5, 6, 7, 8];
+//     println!("the largest number in the array {:?} is {}", numbers, find_largest(&numbers));
+
+//     let charecters: [char; 8] = ['1', '2', '3', '4', '5', '6', '7', '8'];
+//     println!("the largest charecter in the array {:?} is {}", charecters, find_largest(&charecters));
+// }
+
+trait Summary {
+    fn summarize(&self) -> String;
+}
+
+struct NewsArticle {
+    content: String,
+    location: String,
+    author: String,
+}
+
+impl NewsArticle {
+    fn get_news_article_content(self: &Self) -> &String {
+        &self.content
+    }
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        let content: String = self.content;
+        format!("{}, by {} from ({})", self.content, self.author, self.location)
     }
 }
 
 fn main() {
-    let a = String::from("hello");
-    let b = String::from("world!!!");
+    let article1: NewsArticle = NewsArticle {
+        content: String::from("anthropic released it's most powerful model called mythos"),
+        location: String::from("India"),
+        author: String::from("superman")
+    };
 
-    let result = longest(&a, &b);
-
-    println!("{result}");
+    println!("the content of the article1 is: {}", article1.get_news_article_content());
+    println!();
+    println!("the content of the article1 is: {}", article1.content);
+    println!();
+    println!("the summary of the article1 is {}", article1.summarize());
+    println!();
+    println!("the content of the article1 is: {}", article1.content);
 }
