@@ -802,8 +802,8 @@ impl NewsArticle {
 
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
-        let content: String = self.content;
-        format!("{}, by {} from ({})", self.content, self.author, self.location)
+        let content: &String = &self.content;
+        format!("{}, by {} from ({})", &self.content, &self.author, &self.location)
     }
 }
 
