@@ -784,41 +784,48 @@
 //     println!("the largest charecter in the array {:?} is {}", charecters, find_largest(&charecters));
 // }
 
-trait Summary {
-    fn summarize(&self) -> String;
-}
+// trait Summary {
+//     fn summarize(&self) -> String;
+// }
 
-struct NewsArticle {
-    content: String,
-    location: String,
-    author: String,
-}
+// struct NewsArticle {
+//     content: String,
+//     location: String,
+//     author: String,
+// }
 
-impl NewsArticle {
-    fn get_news_article_content(self: &Self) -> &String {
-        &self.content
-    }
-}
+// impl NewsArticle {
+//     fn get_news_article_content(self: &Self) -> &String {
+//         &self.content
+//     }
+// }
 
-impl Summary for NewsArticle {
-    fn summarize(&self) -> String {
-        let content: &String = &self.content;
-        format!("{}, by {} from ({})", &self.content, &self.author, &self.location)
-    }
-}
+// impl Summary for NewsArticle {
+//     fn summarize(&self) -> String {
+//         let content: &String = &self.content;
+//         format!("{}, by {} from ({})", &self.content, &self.author, &self.location)
+//     }
+// }
 
-fn main() {
-    let article1: NewsArticle = NewsArticle {
-        content: String::from("anthropic released it's most powerful model called mythos"),
-        location: String::from("India"),
-        author: String::from("superman")
-    };
+// fn main() {
+//     let article1: NewsArticle = NewsArticle {
+//         content: String::from("anthropic released it's most powerful model called mythos"),
+//         location: String::from("India"),
+//         author: String::from("superman")
+//     };
 
-    println!("the content of the article1 is: {}", article1.get_news_article_content());
-    println!();
-    println!("the content of the article1 is: {}", article1.content);
-    println!();
-    println!("the summary of the article1 is {}", article1.summarize());
-    println!();
-    println!("the content of the article1 is: {}", article1.content);
-}
+//     println!("the content of the article1 is: {}", article1.get_news_article_content());
+//     println!();
+//     println!("the content of the article1 is: {}", article1.content);
+//     println!();
+//     println!("the summary of the article1 is {}", article1.summarize());
+//     println!();
+//     println!("the content of the article1 is: {}", article1.content);
+// }
+
+// fn main() {
+//     let word1 = String::from("apple");
+//     let word2 = &word1;
+//     let word3 = word1;
+//     println!("word2 is {}", word2);
+// }
