@@ -1,10 +1,10 @@
-fn middle_alphabetically<'a, 'b>(w1: &'a str, w2: &'a str, w3: &'b str) -> &'a str {
+fn middle_alphabetically<'a>(w1: &'a str, w2: &'a str, w3: &'a str) -> &'a str {
     if (w1 >= w2 && w1 <= w3) || (w1 <= w2 && w1 >= w3) {
         w1
     } else if (w2 >= w1 && w2 <= w3) || (w2 <= w1 && w2 >= w3) {
         w2
     } else {
-        w2
+        w3
     }
 }
 

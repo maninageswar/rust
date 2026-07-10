@@ -829,3 +829,104 @@
 //     let word3 = word1;
 //     println!("word2 is {}", word2);
 // }
+
+// fn join_words<'a>(w1: &'a str, w2: &'a str, s3: &str) -> String  {
+//     format("{} {} {}", w1, w2, w3)
+// }
+
+// fn main() {
+//     let word1: String = String::from("hello");
+//     let word2: String = String::from("world");
+//     let word3: String = String::from("test");
+// }
+
+// fn main() {
+//     let mut a = 1;
+//     let mut b = 2;
+//     let mut c = 3;
+//     let mut numbers: Vec<&mut i32> = vec![&mut a, &mut b];
+//     // let mut numbers: Vec<&i32> = vec![&a, &b];
+//     // numbers[0] = &c;
+//     *numbers[0] = c;
+//     println!("the numbers is {:?}", numbers);
+// }
+
+// fn main() {
+//     let v: Vec<String> = vec![String::from("superman"), String::from("batman"), String::from("ironman")];
+//     let a: String = v[1];
+//     println!("the value of a is {}",a);
+    // let b: i32 = v[1];
+    // println!("the value of b is {}",b);
+// }
+
+// fn main() {
+//     let a: i32 = 3;
+//     let a = String::from("hello");
+//     println!("the value of a is {}",a);
+// }
+
+// fn main() {
+//     let mut v = vec![100, 32, 57];
+//     for i in &mut v {
+//         i += 50;
+//     }
+//     println!("the vector is {:?}",v);
+// }
+
+// enum SpreadsheetCell {
+//     Int(i32),
+//     Float(f64),
+//     Text(String)
+// }
+
+// fn main() {
+//     let mut v:Vec<SpreadsheetCell> = vec![SpreadsheetCell::Int(1), SpreadsheetCell::Float(1.0), SpreadsheetCell::Text(String::from("hello"))];
+//     let a: Option<&SpreadsheetCell> = v.get(0);
+//     match a {
+//         Some(cell_value) => {
+//             match cell_value {
+//                 SpreadsheetCell::Int(a) => { println!("the value is {}",a)},
+//                 SpreadsheetCell::Float(b) => { println!("the value is {}",b)},
+//                 SpreadsheetCell::Text(c) => { println!("the value is {}",c)}
+//             }
+//         },
+//         None => println!("the index is out of range of length of the vector v")
+//     }
+// }
+
+// fn main() {
+//     let s1 = String::from("tic");
+//     let s2 = String::from("tac");
+//     let s3 = String::from("toe");
+//     let s = format!("{s1}-{s2}-{s3}");
+//     let g = s1;
+//     println!("{}, {}, concated {}", s2,s3,s);
+// }
+
+// fn main() {
+//     let mut vec = vec![1, 2];
+//     vec.push(3);
+// }
+
+// fn find_largest<T: std::cmp::PartialOrd>(numbers: &[T]) -> &T {
+//     let mut largest: &T = &numbers[0];
+//     for number in numbers {
+//         if number > largest {
+//             largest = number;
+//         }
+//     }
+//     largest
+// }
+
+// fn main() {
+//     let numbers:Vec<i32> = vec![1, 3, 4, 6, 9];
+//     println!("the largest number in numbers vector is {}", find_largest(&numbers));
+// }
+
+fn main() {
+    let x = {
+        let a = 5;
+        let b = 5;
+        return a + b;
+    };
+}
