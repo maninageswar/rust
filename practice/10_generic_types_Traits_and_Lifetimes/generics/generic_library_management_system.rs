@@ -1,3 +1,5 @@
+// https://chatgpt.com/c/6a54e373-e870-83ee-ac52-94fcf643a4ba
+
 #[derive(Debug)]
 struct Book {
     title: String,
