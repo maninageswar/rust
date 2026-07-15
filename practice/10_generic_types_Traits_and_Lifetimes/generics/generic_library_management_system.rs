@@ -244,7 +244,13 @@ fn main() {
 
     let resource5: Resource<Book> = Resource::new(4, book4);
 
-    let borrow2 = BorrowRecord::<User, Book>::new(user1, resource5);
+    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::<User, Book>::new(user1, resource5);
+    // or
+    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::new(user1, resource5);
+    // or
+    // let borrow2 = BorrowRecord::<User, Book>::new(user1, resource5);
+    // or
+    let borrow2 = BorrowRecord::new(user1, resource5);
     println!("the borrow1 is {:#?}", borrow2);
     println!("the user of the borrow1 is {:#?}", borrow2.get_user());
     println!("the Resource of the borrow2 is {:#?}", borrow2.get_resource());
