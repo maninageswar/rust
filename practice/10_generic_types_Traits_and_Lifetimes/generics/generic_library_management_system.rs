@@ -4,7 +4,7 @@ trait DisplayInfo {
     fn display_info(&self) -> String;
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Book {
     title: String,
     author: String,
@@ -20,7 +20,7 @@ impl DisplayInfo for Book {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Movie {
     title: String,
     director: String,
@@ -242,16 +242,56 @@ fn main() {
         pages: 4294967294,
     };
 
-    let resource5: Resource<Book> = Resource::new(4, book4);
+    let resource6: Resource<Book> = Resource::new(4, book4);
 
-    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::<User, Book>::new(user1, resource5);
+    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::<User, Book>::new(user1, resource6);
     // or
-    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::new(user1, resource5);
+    // let borrow2: BorrowRecord<User, Book> = BorrowRecord::new(user1, resource6);
     // or
-    // let borrow2 = BorrowRecord::<User, Book>::new(user1, resource5);
+    // let borrow2 = BorrowRecord::<User, Book>::new(user1, resource6);
     // or
-    let borrow2 = BorrowRecord::new(user1, resource5);
+    let borrow2 = BorrowRecord::new(user1, resource6);
     println!("the borrow1 is {:#?}", borrow2);
     println!("the user of the borrow1 is {:#?}", borrow2.get_user());
     println!("the Resource of the borrow2 is {:#?}", borrow2.get_resource());
+
+    let book5: Book = Book {
+        title: String::from("i_am_the_superman"),
+        author: String::from("sai"),
+        pages: 4294967294,
+    };
+
+    let book6: Book = Book {
+        title: String::from("my_travel"),
+        author: String::from("kumar"),
+        pages: 4294967294,
+    };
+
+    println!();
+    let mut resource7: Resource<Book> = Resource::new(5, book5);
+    let mut resource8: Resource<Book> = Resource::new(6, book6);
+    println!("the resource7  before swap is {:#?}", resource7);
+    println!("the resource8  before swap is {:#?}", resource8);
+    swap_same_resources(&mut resource7, &mut resource8);
+    println!();
+    println!("the resource7  after swap is {:#?}", resource7);
+    println!("the resource8  after swap is {:#?}", resource8);
+
+    let book7: Book = Book {
+        title: String::from("i_like_food"),
+        author: String::from("shankar"),
+        pages: 4294967294,
+    };
+
+    let movie2: Movie = Movie {
+        title: String::from("ready_player_one"),
+        director: String::from("mike"),
+        duration: 3600,
+    };
+}
+
+fn swap_same_resources<T: Clone>(r1: &mut Resource<T>, r2: &mut Resource<T>) {
+    let temp: T = r1.data.clone();
+    r1.data = r2.data.clone();
+    r2.data = temp;
 }
