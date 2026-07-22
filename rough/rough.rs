@@ -923,10 +923,58 @@
 //     println!("the largest number in numbers vector is {}", find_largest(&numbers));
 // }
 
+// fn main() {
+//     let x = {
+//         let a = 5;
+//         let b = 5;
+//         return a + b;
+//     };
+// }
+
+// fn main() {
+//     let x = 5;
+
+//     let y = dbg!(x * 2);
+
+//     println!("{}", y);
+// }
+
+// fn something(a: [String]) {
+//     println!("Got {} items", a.len());
+// }
+
+// fn main() {
+//     let my_vec = vec![String::from("A"), String::from("B")];
+//     let my_array = [String::from("X"), String::from("Y"), String::from("B")];
+
+//     // Pass a reference to the Vec
+//     // something(&my_vec); 
+    
+//     // Pass a reference to the array
+//     something(my_array); 
+// }
+
+// fn console_log(name: &str) {
+//     println!("the name of the person is {}", name);
+// }
+
+// fn main() {
+//     let name: String = String::from("kiran");
+//     console_log(name);
+// }
+
+// fn calculate_area(radius: f64) -> f64 {
+//     unimplemented!()
+// }
+
+// fn main() {
+//     calculate_area(5.0);
+// }
+
 fn main() {
-    let x = {
-        let a = 5;
-        let b = 5;
-        return a + b;
-    };
+    let text = "
+    hello
+    world";
+
+    println!("{}", text);
 }
