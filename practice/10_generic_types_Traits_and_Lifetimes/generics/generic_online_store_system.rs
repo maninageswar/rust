@@ -1,8 +1,20 @@
+//see the entire problem statement given by chatgpt at: https://chatgpt.com/c/6a54e373-e870-83ee-ac52-94fcf643a4ba
+
+trait ProductInfo {
+    fn show_info(&self) -> String;
+}
+
 #[derive(Debug, Clone)]
 struct Electronics {
     name: String,
     brand: String,
     price: f64
+}
+
+impl ProductInfo for Electronics {
+    fn show_info(&self) -> String {
+        format!("The price of the electronic item {} form the brand {} is {}", self.name, self.brand, self.price)
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -12,11 +24,23 @@ struct Clothing {
     price: f64
 }
 
+impl ProductInfo for Clothing {
+    fn show_info(&self) -> String {
+        format!("The price of the clothing item {} of size {} is {}", self.name, self.size, self.price)
+    }
+}
+
 #[derive(Debug, Clone)]
 struct Grocery {
     name: String,
-    expiry_days: u32,
+    expiry_date: u32,
     price: f64
+}
+
+impl ProductInfo for Grocery {
+    fn show_info(&self) -> String {
+        format!("The price of the grocery item {} which has an expiry date of {} is {}", self.name, self.expiry_date, self.price)
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -49,6 +73,12 @@ impl<T> Product<T> {
 
     fn update_stock(&mut self, value: u32) {
         self.stock += value;
+    }
+}
+
+impl<T: ProductInfo> Product<T> {
+    fn display_products(&self) -> String {
+        self.data.show_info()
     }
 }
 
@@ -116,11 +146,12 @@ fn main() {
     };
 
     let product2: Product<Electronics> = Product::new(2, electronics2, 50);
-
+    println!("product2 info is {:#?}", product2.display_products());
+    println!();
     let mut electronic_store1: Store<Electronics> = Store::new(String::from("Apple"));
     electronic_store1.add_product(product1);
     electronic_store1.add_product(product2);
-    println!("the electronic_store1 before removing any product is {:#?}", electronic_store1);
+    println!("the electronic_store1 before removing any product is {:#?}", electronic_store1)
     println!("total number of products the electronic_store1 is {}", electronic_store1.get_products_count());
     println!("is electronic_store1 empty: {}", electronic_store1.is_empty());
 }

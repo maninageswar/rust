@@ -971,10 +971,11 @@
 //     calculate_area(5.0);
 // }
 
-fn main() {
-    let text = "
-    hello
-    world";
+// fn main() {
+//     let text = "
+//     hello
+//     world";
 
-    println!("{}", text);
-}
+//     println!("{}", text);
+// }
+
