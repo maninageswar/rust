@@ -979,3 +979,82 @@
 //     println!("{}", text);
 // }
 
+// fn main() {
+//     let mut count = 0;
+
+//     let mut increment = || {
+//         let result = count + 1;
+//         result
+//     };
+
+//     println!("The increment value is {:?}", increment())
+// }
+
+// fn main() {
+//     let mut name1: String = String::from("java");
+//     let mut name2: String = String::from("rust");
+//     let mut a = [name1, name2];
+
+//     for mut element in &mut a {
+//         element.push_str(" language");
+//         println!("the value is: {element}");
+//     }
+
+//     println!("the a is {:?}", a);
+// }
+
+// fn main() {
+//     let v1 = vec![1, 2, 3];
+
+    // let v1_iter = v1.into_iter();
+
+    // let total: i32 = v1_iter.sum();
+
+//     for i in &v1 {
+//         println!("the value is {}", i);
+//     }
+
+//     println!("v1 is {:?}", v1);
+// }
+
+// fn main() {
+//     let v1: Vec<i32> = vec![1, 2, 3];
+
+//     let _ = v1.iter().map(|x| x + 1);
+
+//     println!("the v1 is {:?}", v1);
+
+// }
+
+// fn main() {
+//     let numbers = vec![1, 2, 3];
+
+//     let iter = numbers.iter().map(|x| {
+//         println!("Mapping {}", x);
+//         x * 2
+//     });
+
+//     println!("Done!");
+// }
+
+// fn main() {
+//     let v1: Vec<i32> = vec![1, 2, 3];
+
+//     let v2: Vec<i32> = v1.iter().map(|x| x + 1).collect();
+
+//     println!("{:?}",v2);
+// }
+
+fn add_greeting(mut message: String) -> String {
+    message.push_str(", welcome to Rust!");
+    message
+}
+
+fn main() {
+    let mut text = String::from("Hello");
+
+    // Ownership is moved into the function.
+    let text_1 = add_greeting(text);
+
+    println!("{}", text_1); // Hello, welcome to Rust!
+}
