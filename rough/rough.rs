@@ -1045,16 +1045,27 @@
 //     println!("{:?}",v2);
 // }
 
-fn add_greeting(mut message: String) -> String {
-    message.push_str(", welcome to Rust!");
-    message
-}
+// fn add_greeting(mut message: String) -> String {
+//     message.push_str(", welcome to Rust!");
+//     message
+// }
+
+// fn main() {
+//     let mut text = String::from("Hello");
+
+//     // Ownership is moved into the function.
+//     let text_1 = add_greeting(text);
+
+//     println!("{}", text_1); // Hello, welcome to Rust!
+// }
 
 fn main() {
-    let mut text = String::from("Hello");
+    let numbers = vec![1, 2, 3, 4];
 
-    // Ownership is moved into the function.
-    let text_1 = add_greeting(text);
+    let result: Vec<_> = numbers.iter()
+        .map(|x| x * 2)
+        .filter(|x| *x > 4)
+        .collect();
 
-    println!("{}", text_1); // Hello, welcome to Rust!
+    println!("the result is {:?}", result);
 }
