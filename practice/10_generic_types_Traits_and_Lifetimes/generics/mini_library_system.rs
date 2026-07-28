@@ -198,9 +198,27 @@ impl<T: LibraryItem> Library<T> {
     }
 
     fn borrow_library_item(&mut self, id: u32, user: User, days: u32) {
-        // if let Some(item) = self.items.iter_mut().find(|item| item.id == id) {
-        // learn why we should only use below but above line try using the above line see what error you will encounter
-        if let Some(item) = self.items.iter_mut().find(|item| *item.get_id() == id) {
+        /* please go through below points important
+        
+        if let Some(item) = self.items.iter_mut().find(|item| item.id == id) {
+        learn why we should only use below but above line try using the above line see what error you will encounter
+
+        iter_mut() Yields Mutable References: Calling .iter_mut() on a collection like a Vec<T> produces an iterator where each element is a mutable reference: &mut T.
+
+        .find() Adds Another Reference Layer: The .find() method takes a closure and passes a reference to the item being evaluated. Because the item is already a &mut T, the closure receives item as &&mut T (a reference to a mutable reference).
+        
+        Automatic Dereferencing (Auto-Deref): When you use the dot operator (e.g., item.get_id()), Rust automatically dereferences the caller as many times as necessary. Even though item is &&mut T or &&&mut T, Rust will peel back those layers to find the base T that implements the method.
+        
+        Implicit Reference Coercion: If a method expects an immutable reference (&self / &T), but you pass it a mutable reference (&mut T inside the auto-deref process), Rust safely and automatically downgrades it to an immutable reference for that method call.
+        
+        Dereferencing the Result, Not the Caller: In the expression *item.get_id() == id, the * is not dereferencing item. Instead, it is dereferencing the return value of get_id() (which is &u32) into a plain u32 so it can be compared to the id parameter.
+        
+        Reference Matching (Your Way Works!): Instead of dereferencing the result, you can reference the target value. Doing item.get_id() == &id works perfectly because both sides are now &u32. Furthermore, adding extra reference layers deliberately (like let item_ref = &item;) still works because auto-dereferencing simply steps through as many pointers as necessary.
+        */
+        if let Some(item) = self.items.iter_mut().find(|item| {
+            let item_ref = &item;
+            item_ref.get_id() == &id
+        }) {
             item.borrow_item(user, days);
         } else {
             println!("item with id: {} not found in {}", id, self.name)
