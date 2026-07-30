@@ -1,5 +1,7 @@
 // see the entire problem statement given by chatgpt at: https://chatgpt.com/c/6a676f87-8cac-83e8-aeef-e3aaa41bae98
 
+use std::time::Duration;
+
 trait LibraryItem {
     fn get_id(&self) -> &u32;
 
@@ -23,7 +25,7 @@ enum BorrowingStatus {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct User {
     name: String,
     email: String,
@@ -83,7 +85,7 @@ impl LibraryItem for Book {
                 days
             }
         } else {
-            println!("sorry the item: {:?} is not avaliable to borrow", self)
+            println!("sorry the item: {:#?} is not avaliable to borrow", self)
         }
     }
 }
@@ -138,7 +140,7 @@ impl LibraryItem for Magazine {
 struct DVD {
     id: u32,
     title: String,
-    duration_in_minutes: String,
+    duration_in_seconds: Duration,
     genre: u32,
     staus: BorrowingStatus
 }
@@ -180,12 +182,16 @@ impl LibraryItem for DVD {
     }
 }
 
+#[derive(Debug)]
 struct Library<T: LibraryItem> {
     name: String,
     items: Vec<T>
 }
 
 impl<T: LibraryItem> Library<T> {
+    // the below associated fun and methods only avaliable for T where T implements LibraryItem trait
+    // additionaly Library struct can store any T like it can also store items of Strings or u32 but those 
+    // types does not make any sense right hence we defined trait bound which LibraryItem
     fn new(name: String) -> Self {
         Self {
             name,
@@ -216,15 +222,45 @@ impl<T: LibraryItem> Library<T> {
         Reference Matching (Your Way Works!): Instead of dereferencing the result, you can reference the target value. Doing item.get_id() == &id works perfectly because both sides are now &u32. Furthermore, adding extra reference layers deliberately (like let item_ref = &item;) still works because auto-dereferencing simply steps through as many pointers as necessary.
         */
         if let Some(item) = self.items.iter_mut().find(|item| {
+            // here i have specifically created a ref of item(which is of type &&mut T) that makes it &&&mut T
             let item_ref = &item;
+            // but the below line still works even though get_id() method only accepts &T that's because dereference coersion 
             item_ref.get_id() == &id
         }) {
-            item.borrow_item(user, days);
+            item.borrow_item(user.clone(), days);
+            // let mut borrow_record = BorrowRecord::new(item, &user, String::from("30-7-2026"));
+            // Or
+            let mut borrow_record: BorrowRecord<'_, '_, T> = BorrowRecord::new(item, &user, String::from("30-7-2026"));
+            
         } else {
             println!("item with id: {} not found in {}", id, self.name)
         }
     }
+
+    fn search_item(&self, id: u32) -> Option<&T> {
+        self.items.iter().find(|item| item.get_id() == &id)
+    }
+
+    fn display_all_items(&self) {
+        // for item in &self.items {
+        //     item.print_item()
+        // }
+        // or
+        self.items.iter().for_each(|item| item.print_item());
+        // In the context of types, &T and &(T) are treated as exactly the same thing by the Rust compiler.
+        // &value is exactly the same as &(value).
+        // &self.items.iter().find(...) is exactly the same as &(self.items.iter().find(...))
+    }
+
+    fn display_borrowed_items(&self) {
+        self.items.iter().filter(|item| item.can_be_borrowed() == false).for_each(|item| item.print_item());
+    }
+
+    fn display_avaliable_items(&self) {
+        self.items.iter().filter(|item| item.can_be_borrowed() != false).for_each(|item| item.print_item());
+    }
 }
+
 
 fn main() {
     let user1: User = User {
@@ -232,12 +268,146 @@ fn main() {
         email: String::from("sairam@gmail.com"),
         phone: 9876543210
     };
+
+    let user2: User = User {
+        name: String::from("shankar"),
+        email: String::from("shankar@gmail.com"),
+        phone: 9876543210
+    };
+
     let mut book1: Book = Book::new(1, String::from("deep work"), String::from("cal newport"), 154, BorrowingStatus::Available);
-    book1.print_item();
-    println!("the id of the book1 is {}", book1.get_id());
-    println!("the title of the book1 is {}", book1.get_title());
-    println!("the status of the book1 is {:?}", book1.get_status());
-    println!("can book1 be borrowed {}", book1.can_be_borrowed());
+    let mut book2: Book = Book::new(2, String::from("i can do it"), String::from("shankar"), 254, BorrowingStatus::Available);
+    let mut book3: Book = Book::new(3, String::from("path to success"), String::from("manoj"), 354, BorrowingStatus::Available);
+    // book1.print_item();
+    // println!("the id of the book1 is {}", book1.get_id());
+    // println!("the title of the book1 is {}", book1.get_title());
+    // println!("the status of the book1 is {:?}", book1.get_status());
+    // println!("can book1 be borrowed {}", book1.can_be_borrowed());
     book1.borrow_item(user1, 7);
-    book1.print_item();
+    // book1.print_item();
+    let mut book_library1: Library<Book> = Library::new(String::from("vishal andhra"));
+    book_library1.add_item(book1);
+    book_library1.add_item(book2);
+    book_library1.add_item(book3);
+    println!("book_library1: {:#?}", book_library1);
+    book_library1.borrow_library_item(1, user2, 5);
+
+    // if you want the below statement to work you have to remove the trait bound(LibraryItem) on Library struct (struct Library<T: LibraryItem> )
+    // let mut book_library2: Library<String> = Library {
+    //     name: String::from("vishal andhra"),
+    //     items: vec![String::from("supreman1")],
+    // };
+
+    match book_library1.search_item(5) {
+        Some(item) => println!("the details of the item that you are searching for is {:#?}", item),
+        None => println!("sorry the item you are searching for does not exist in this library"),
+    }
+
+    println!("\ndisplay all items\n");
+    book_library1.display_all_items();
+    println!("\ndisplay all borrowed items\n");
+    book_library1.display_borrowed_items();
+    println!("\ndisplay all avaliable items\n");
+    book_library1.display_avaliable_items();
+
+    let mut magazine1: Magazine = Magazine {
+        id: 1,
+        title: String::from("my rules"),
+        issue_number: 2343,
+        publisher: String::from("general publishers"),
+        staus: BorrowingStatus::Available,
+    };
+
+    let mut dvd1: DVD = DVD {
+        id: 1,
+        title: String::from("nezha1"),
+        duration_in_seconds: Duration::from_secs((3 * 3600) + (2 * 60) + 7),
+        genre: 23,
+        staus: BorrowingStatus::Available,
+    };
+
+    print_any_library_item(&magazine1);
+    // the trait bound `User: LibraryItem` is not satisfied
+    // print_any_library_item(&user3);
+    print_any_library_item(&dvd1);
+
+    let mut dvd2: DVD = DVD {
+        id: 2,
+        title: String::from("nezha2"),
+        duration_in_seconds: Duration::from_secs((3 * 3600) + (2 * 60) + 7),
+        genre: 23,
+        staus: BorrowingStatus::Available,
+    };
+
+    let user3: User = User {
+        name: String::from("shankar"),
+        email: String::from("shankar@gmail.com"),
+        phone: 9876543210
+    };
+
+    let mut dvd_library1: Library<DVD> = Library::new(String::from("sony dvd's"));
+
+    let mut dvd_borrow_history1: BorrowHistory<'_, '_, DVD> = BorrowHistory::new(String::from("dvd_borrow_history1"));
+    // or
+    // let mut dvd_borrow_history1 = BorrowHistory::<'_, '_, DVD>::new(String::from("dvd_borrow_history1"));
+
+    dvd_library1.add_item(dvd2);
+    dvd_library1.borrow_library_item(2, user3, 6)
+}
+
+fn print_any_library_item<T: LibraryItem>(item: &T) {
+    item.print_item()
+}
+
+fn search_borrowed_record_form_borrow_history<'a, 'b, 'c, T: LibraryItem>(borrow_history_type: &'c BorrowHistory<'a, 'b, T>, item_id: u32) -> Option<&'c BorrowRecord<'a, 'b, T>>{
+    borrow_history_type.borrow_history.iter().find(|item| item.borrowed_item.get_id() == &item_id)
+}
+
+#[derive(Debug)]
+struct BorrowRecord<'a, 'b, T: LibraryItem> {
+    borrowed_item: &'a T,
+    borrowed_user: &'b User,
+    borrow_date: String,
+}
+
+impl<'a, 'b, T: LibraryItem> BorrowRecord<'a, 'b, T> {
+    fn new(borrowed_item: &'a T, borrowed_user: &'b User, borrow_date: String,) -> Self {
+        Self {
+            borrowed_item,
+            borrowed_user,
+            borrow_date,
+        }
+    }
+
+    fn get_borrowed_item_user(&self) -> &User {
+        self.borrowed_user
+    }
+
+    fn get_borrowed_item(&self) -> &T {
+        self.borrowed_item
+    }
+
+    fn get_borrowed_date(&self) -> &String {
+        &self.borrow_date
+    }
+
+    fn print_borrowed_item(&self) {
+        println!("\nthe borrowed record is:");
+        self.borrowed_item.print_item();
+    }
+}
+
+#[derive(Debug)]
+struct BorrowHistory<'a, 'b, T: LibraryItem> {
+    name: String,
+    borrow_history: Vec<BorrowRecord<'a, 'b, T>>,
+}
+
+impl <'a, 'b, T: LibraryItem> BorrowHistory<'a, 'b, T> {
+    fn new(name: String) -> Self {
+        Self {
+            name,
+            borrow_history: Vec::<BorrowRecord<'a, 'b, T>>::new(),
+        }
+    }
 }
