@@ -13,7 +13,7 @@ trait LibraryItem {
 
     fn print_item(&self);
 
-    fn borrow_item(&mut self, user: User, days: u32);
+    fn borrow_item(&mut self, user: User, days: u32) -> Option<bool>;
 }
 
 #[derive(Debug)]
@@ -78,14 +78,16 @@ impl LibraryItem for Book {
         println!("{:#?}", self);
     }
 
-    fn borrow_item(&mut self, user: User, days: u32) {
+    fn borrow_item(&mut self, user: User, days: u32) -> Option<bool> {
         if self.can_be_borrowed() {
             self.staus = BorrowingStatus::Borrowed {
                 user,
                 days
-            }
+            };
+            Some(true)
         } else {
-            println!("sorry the item: {:#?} is not avaliable to borrow", self)
+            println!("sorry the item: {:#?} is not avaliable to borrow", self);
+            None
         }
     }
 }
@@ -124,14 +126,16 @@ impl LibraryItem for Magazine {
         println!("{:#?}", self);
     }
 
-    fn borrow_item(&mut self, user: User, days: u32) {
+    fn borrow_item(&mut self, user: User, days: u32) -> Option<bool> {
         if self.can_be_borrowed() {
             self.staus = BorrowingStatus::Borrowed {
                 user,
                 days
-            }
+            };
+            Some(true)
         } else {
-            println!("sorry the item: {:?} is not avaliable to borrow", self)
+            println!("sorry the item: {:#?} is not avaliable to borrow", self);
+            None
         }
     }
 }
@@ -170,14 +174,16 @@ impl LibraryItem for DVD {
         println!("{:#?}", self);
     }
 
-    fn borrow_item(&mut self, user: User, days: u32) {
+    fn borrow_item(&mut self, user: User, days: u32) -> Option<bool> {
         if self.can_be_borrowed() {
             self.staus = BorrowingStatus::Borrowed {
                 user,
                 days
-            }
+            };
+            Some(true)
         } else {
-            println!("sorry the item: {:?} is not avaliable to borrow", self)
+            println!("sorry the item: {:#?} is not avaliable to borrow", self);
+            None
         }
     }
 }
@@ -203,7 +209,7 @@ impl<T: LibraryItem> Library<T> {
         self.items.push(item);
     }
 
-    fn borrow_library_item(&mut self, id: u32, user: User, days: u32) {
+    fn borrow_library_item<'b>(&mut self, id: u32, user: &'b User, days: u32) -> Option<BorrowRecord<'_, 'b, T>> {
         /* please go through below points important
         
         if let Some(item) = self.items.iter_mut().find(|item| item.id == id) {
@@ -227,13 +233,19 @@ impl<T: LibraryItem> Library<T> {
             // but the below line still works even though get_id() method only accepts &T that's because dereference coersion 
             item_ref.get_id() == &id
         }) {
-            item.borrow_item(user.clone(), days);
-            // let mut borrow_record = BorrowRecord::new(item, &user, String::from("30-7-2026"));
-            // Or
-            let mut borrow_record: BorrowRecord<'_, '_, T> = BorrowRecord::new(item, &user, String::from("30-7-2026"));
-            
+            if let Some(borrowed_status) = item.borrow_item(user.clone(), days) {
+                if borrowed_status == true {
+                    // let borrow_record = BorrowRecord::new(item, &user, String::from("30-7-2026"));
+                    // Or
+                    let borrow_record: BorrowRecord<'_, 'b, T> = BorrowRecord::new(item, user, String::from("30-7-2026"));
+                    return Some(borrow_record);
+                }
+                return None;
+            }
+            return None;
         } else {
-            println!("item with id: {} not found in {}", id, self.name)
+            println!("item with id: {} not found in {}", id, self.name);
+            return None;
         }
     }
 
@@ -283,14 +295,13 @@ fn main() {
     // println!("the title of the book1 is {}", book1.get_title());
     // println!("the status of the book1 is {:?}", book1.get_status());
     // println!("can book1 be borrowed {}", book1.can_be_borrowed());
-    book1.borrow_item(user1, 7);
+    // book1.borrow_item(user1, 7);
     // book1.print_item();
     let mut book_library1: Library<Book> = Library::new(String::from("vishal andhra"));
     book_library1.add_item(book1);
     book_library1.add_item(book2);
     book_library1.add_item(book3);
     println!("book_library1: {:#?}", book_library1);
-    book_library1.borrow_library_item(1, user2, 5);
 
     // if you want the below statement to work you have to remove the trait bound(LibraryItem) on Library struct (struct Library<T: LibraryItem> )
     // let mut book_library2: Library<String> = Library {
@@ -351,8 +362,18 @@ fn main() {
     // or
     // let mut dvd_borrow_history1 = BorrowHistory::<'_, '_, DVD>::new(String::from("dvd_borrow_history1"));
 
+    println!("\nbefore borrowing");
+    println!("\ndvd2: {:#?}",dvd2);
+    println!("\ndvd_borrow_history1: {:#?}", dvd_borrow_history1);
     dvd_library1.add_item(dvd2);
-    dvd_library1.borrow_library_item(2, user3, 6)
+    
+    match dvd_library1.borrow_library_item(2, &user3, 6) {
+        Some(borrowed_record) => dvd_borrow_history1.add_borrowed_record_to_borrow_history(borrowed_record),
+        None => println!("sorry the item dvd2 cannot be borrowed for the library"),
+    }
+
+    println!("\nafter borrowing");
+    println!("\ndvd_borrow_history1: {:#?}", dvd_borrow_history1);
 }
 
 fn print_any_library_item<T: LibraryItem>(item: &T) {
@@ -409,5 +430,9 @@ impl <'a, 'b, T: LibraryItem> BorrowHistory<'a, 'b, T> {
             name,
             borrow_history: Vec::<BorrowRecord<'a, 'b, T>>::new(),
         }
+    }
+
+    fn add_borrowed_record_to_borrow_history(&mut self, borrowed_record: BorrowRecord<'a, 'b, T>) {
+        self.borrow_history.push(borrowed_record);
     }
 }
