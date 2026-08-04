@@ -35,7 +35,7 @@ impl Equipment for Camera {
             return Some(true);
         } else {
             println!("sorry, the Equipment is not avaliable to be rented");
-            return None;
+            return Some(false);
         }
     }
 
@@ -138,35 +138,62 @@ impl Equipment for Microphone {
 }
 
 pub struct RentalShop<T: Equipment> {
-    name: String,
-    equipments: Vec<T>,
+    pub name: String,
+    pub equipments: Vec<T>,
 }
 
 impl<T: Equipment> RentalShop<T> {
-    fn add_equipment(&mut self, equipment:T) {
+    pub fn add_equipment(&mut self, equipment:T) {
         self.equipments.push(equipment);
     }
 
-    fn remove_equipment(&mut self, id: u32) {
+    pub fn remove_equipment(&mut self, id: u32) {
         self.equipments.retain(|equipment| equipment.get_equipment_id() != id);
     }
 
-    fn rent_equipment(&mut self, id: u32, customer: Customer, rental_duration: Duration) {
-        let is_equipment_rented = self.equipments.iter_mut()
+    pub fn rent_equipment<'a, 'b>(&'a mut self, id: u32, customer: &'b Customer, rental_duration: Duration) -> Option<RentalRecord<'a, 'b, T>> {
+        let equipment_to_be_rented: &mut T = self.equipments.iter_mut()
             .find(|equipment| equipment.get_equipment_id() == id)
-            .unwrap_or_else(|| panic!("rent equipment: we did not find an equipment that has an id: {} in the RentalShop", id))
-            .rent_equipment(customer, rental_duration);
-        
+            .unwrap_or_else(|| panic!("rent equipment: we did not find an equipment that has an id: {} in the RentalShop", id));
+        // instead of clonning the customer try to change the code so that you can add the reference
+        let is_equipment_rented = equipment_to_be_rented.rent_equipment(customer.clone(), rental_duration);
+        // drop(equipment_to_be_rented);
         if let Some(equipment_rented_status) = is_equipment_rented {
             if equipment_rented_status == true {
                 println!("thank you so much for renting the equipment with id: {}", id);
+                let rental_record: RentalRecord<'a, 'b, T> = RentalRecord::new(equipment_to_be_rented, customer, String::from("04-08-26"));
+                return Some(rental_record);
             } else {
-                // None
+                println!("sorry the equipment with id: {} has already been rented", id);
+                return None;
             }
         } else {
-            panic!("sorry the equipment with id: {} has already been rented", id);
-            // None
+            return None;
         }
+    }
+
+    pub fn search_equipment(&self, id: u32) -> Option<&T> {
+        self.equipments.iter().find(|equipment| equipment.get_equipment_id() == id)
+    }
+
+    pub fn list_all_equipments(&self) {
+        self.equipments.iter().for_each(|item| item.print_equipment());
+    }
+
+    pub fn list_all_rented_equipments(&self) {
+        self.equipments.iter().for_each(|item| {
+            if item.is_equipment_avaliable() == false {
+                item.print_equipment()
+            }
+        });
+    }
+
+    pub fn list_all_avaliable_equipments(&self) {
+        self.equipments.iter().for_each(|item| {
+            if item.is_equipment_avaliable() == true {
+                item.print_equipment()
+            }
+        });
     }
 }
 
@@ -193,12 +220,20 @@ pub struct RentalHistory<'a, 'b, T: Equipment> {
     rental_history: Vec<RentalRecord<'a, 'b, T>>
 }
 
-impl<'a, 'b, T: Equipment>  RentalHistory<'a, 'b, T> {
-    fn new(name: String) -> Self {
+impl<'a, 'b, T: Equipment + std::cmp::PartialEq>  RentalHistory<'a, 'b, T> {
+    pub fn new(name: String) -> Self {
         Self {
             name,
             rental_history: Vec::<RentalRecord<'a, 'b, T>>::new(),
         }
+    }
+
+    pub fn add_rental_record(&mut self, rental_record: RentalRecord<'a, 'b, T>) {
+        self.rental_history.push(rental_record);
+    }
+
+    pub fn remove_rental_record(&mut self, rental_record: RentalRecord<'a, 'b, T>) {
+        self.rental_history.retain(|record| record != &rental_record);
     }
 }
 

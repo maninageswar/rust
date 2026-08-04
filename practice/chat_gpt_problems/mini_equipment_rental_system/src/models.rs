@@ -10,7 +10,7 @@ pub enum Status {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Customer {
     pub id: u32,
     pub name: String,
@@ -18,7 +18,7 @@ pub struct Customer {
 }
 
 impl Customer {
-    fn new(id: u32, name: String, phone_number: u64) -> Self {
+    pub fn new(id: u32, name: String, phone_number: u64) -> Self {
         Self {
             id,
             name,
@@ -58,7 +58,7 @@ pub struct Laptop {
 }
 
 impl Laptop {
-    fn new(id: u32, brand: String, processor: String, ram: String, status: Status) -> Self {
+    pub fn new(id: u32, brand: String, processor: String, ram: String, status: Status) -> Self {
         Self {
             id,
             brand,
