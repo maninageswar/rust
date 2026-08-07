@@ -1,17 +1,10 @@
 pub mod models;
+pub mod traits;
+
 use models::*;
+use traits::*;
 // the below line is not needed as it is re-exported in models module and since you are using every thing that is avaliable in models using "use models::*;" so Duration is also included
 // use std::time::Duration;
-
-pub trait Equipment {
-    fn get_equipment_id(&self) -> u32;
-
-    fn is_equipment_avaliable(&self) -> bool;
-
-    fn rent_equipment(&mut self, customer: Customer, rental_duration: Duration) -> Option<bool>;
-
-    fn print_equipment(&self);
-}
 
 impl Equipment for Camera {
     fn get_equipment_id(&self) -> u32 {
@@ -137,10 +130,6 @@ impl Equipment for Microphone {
     }
 }
 
-pub struct RentalShop<T: Equipment> {
-    pub name: String,
-    pub equipments: Vec<T>,
-}
 
 impl<T: Equipment> RentalShop<T> {
     pub fn add_equipment(&mut self, equipment:T) {
@@ -205,37 +194,8 @@ impl<T: Equipment> RentalShop<T> {
     }
 }
 
-#[derive(Debug, PartialEq)]
-pub struct RentalRecord<'a, 'b, T: Equipment> {
-    pub rented_equipment: &'a T,
-    pub customer: &'b Customer,
-    pub rental_date: String,
-}
-
-impl<'a, 'b, T: Equipment> RentalRecord<'a, 'b, T> {
-    fn new(rented_equipment: &'a T, customer: &'b Customer, rental_date: String) -> Self {
-        Self {
-            rented_equipment,
-            customer,
-            rental_date,
-        }
-    }
-}
-
-#[derive(Debug, PartialEq)]
-pub struct RentalHistory<'a, 'b, T: Equipment> {
-    name: String,
-    rental_history: Vec<RentalRecord<'a, 'b, T>>
-}
 
 impl<'a, 'b, T: Equipment + std::cmp::PartialEq>  RentalHistory<'a, 'b, T> {
-    pub fn new(name: String) -> Self {
-        Self {
-            name,
-            rental_history: Vec::<RentalRecord<'a, 'b, T>>::new(),
-        }
-    }
-
     pub fn add_rental_record(&mut self, rental_record: RentalRecord<'a, 'b, T>) {
         self.rental_history.push(rental_record);
     }

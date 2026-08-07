@@ -1,6 +1,8 @@
 // remove the pub keyword in the below line and try to run it in lib.rs file wherever you used Duration
 pub use std::time::Duration;
 
+use crate::traits::Equipment;
+
 #[derive(Debug, PartialEq)]
 pub enum Status {
     Available,
@@ -107,3 +109,39 @@ impl Microphone {
     }
 }
 
+pub struct RentalShop<T: Equipment> {
+    pub name: String,
+    pub equipments: Vec<T>,
+}
+
+#[derive(Debug, PartialEq)]
+pub struct RentalRecord<'a, 'b, T: Equipment> {
+    pub rented_equipment: &'a T,
+    pub customer: &'b Customer,
+    pub rental_date: String,
+}
+
+impl<'a, 'b, T: Equipment> RentalRecord<'a, 'b, T> {
+    pub fn new(rented_equipment: &'a T, customer: &'b Customer, rental_date: String) -> Self {
+        Self {
+            rented_equipment,
+            customer,
+            rental_date,
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
+pub struct RentalHistory<'a, 'b, T: Equipment> {
+    pub name: String,
+    pub rental_history: Vec<RentalRecord<'a, 'b, T>>
+}
+
+impl<'a, 'b, T: Equipment + std::cmp::PartialEq>  RentalHistory<'a, 'b, T> {
+    pub fn new(name: String) -> Self {
+        Self {
+            name,
+            rental_history: Vec::<RentalRecord<'a, 'b, T>>::new(),
+        }
+    }
+}
