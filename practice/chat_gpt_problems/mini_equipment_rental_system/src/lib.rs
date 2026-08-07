@@ -151,6 +151,14 @@ impl<T: Equipment> RentalShop<T> {
         self.equipments.retain(|equipment| equipment.get_equipment_id() != id);
     }
 
+    // test function to understand how lifetimes affects the return type of the function
+    pub fn some_test<'a, 'b>(&'a self, id: u32, customer: &'b Customer, rental_duration: Duration) -> Option<RentalRecord<'a, 'b, T>> {
+        let equipment = self.equipments.get(0).expect("the rental shop does not have any equipments");
+        let rental_record: RentalRecord<'a, 'b, T> = RentalRecord::new(equipment, customer, String::from("04-08-26"));
+        return Some(rental_record);
+    }
+
+    // 
     pub fn rent_equipment<'a, 'b>(&'a mut self, id: u32, customer: &'b Customer, rental_duration: Duration) -> Option<RentalRecord<'a, 'b, T>> {
         let equipment_to_be_rented: &mut T = self.equipments.iter_mut()
             .find(|equipment| equipment.get_equipment_id() == id)
