@@ -1059,13 +1059,33 @@
 //     println!("{}", text_1); // Hello, welcome to Rust!
 // }
 
+// fn main() {
+//     let numbers = vec![1, 2, 3, 4];
+
+//     let result: Vec<_> = numbers.iter()
+//         .map(|x| x * 2)
+//         .filter(|x| *x > 4)
+//         .collect();
+
+//     println!("the result is {:?}", result);
+// }
+
+// fn main() {
+//     let name: String = String::from("ravi");
+//     print_name(&name);
+// }
+
+// fn print_name(name: &str) {
+//     println!("the name is {}", name);
+// }
+
 fn main() {
-    let numbers = vec![1, 2, 3, 4];
+    println!("{}", get_formated(String::from("sai")));
+}
 
-    let result: Vec<_> = numbers.iter()
-        .map(|x| x * 2)
-        .filter(|x| *x > 4)
-        .collect();
-
-    println!("the result is {:?}", result);
+fn get_formated(name: String) -> String {
+    format!("
+    ### hi there {} ###
+    $$$ i hope are doing fine $$$$
+    ", name)
 }
