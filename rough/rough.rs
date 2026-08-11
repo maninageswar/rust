@@ -1079,13 +1079,43 @@
 //     println!("the name is {}", name);
 // }
 
-fn main() {
-    println!("{}", get_formated(String::from("sai")));
-}
+// fn main() {
+//     println!("{}", get_formated(String::from("sai")));
+// }
 
-fn get_formated(name: String) -> String {
-    format!("
-    ### hi there {} ###
-    $$$ i hope are doing fine $$$$
-    ", name)
+// fn get_formated(name: String) -> String {
+//     format!("
+//     ### hi there {} ###
+//     $$$ i hope are doing fine $$$$
+//     ", name)
+// }
+
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut scores = HashMap::new();
+
+//     scores.insert("Alice", 90);
+//     scores.insert("Bob", 85);
+//     scores.insert("Charlie", 95);
+
+//     println!("{:?}", scores);
+// }
+
+use std::collections::HashMap;
+
+fn main() {
+    let mut map1 = HashMap::new();
+    map1.insert("a", 1);
+    map1.insert("b", 2);
+
+    let mut map2 = HashMap::new();
+    map2.insert("b", 2);
+    map2.insert("a", 1);
+
+    if map1 == map2 {
+        println!("Maps are equal");
+    } else {
+        println!("Maps are not equal");
+    }
 }
