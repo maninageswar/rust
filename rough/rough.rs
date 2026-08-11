@@ -1102,20 +1102,46 @@
 //     println!("{:?}", scores);
 // }
 
-use std::collections::HashMap;
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut map1 = HashMap::new();
+//     map1.insert("a", 1);
+//     map1.insert("b", 2);
+
+//     let mut map2 = HashMap::new();
+//     map2.insert("b", 2);
+//     map2.insert("a", 1);
+
+//     if map1 == map2 {
+//         println!("Maps are equal");
+//     } else {
+//         println!("Maps are not equal");
+//     }
+// }
+
+#[derive(Debug)]
+struct CombatStats {
+    health: i32,
+    attack: i32,
+}
+
+#[derive(Debug)]
+enum EnemyType {
+    Zombie(CombatStats),
+    Skeleton(CombatStats),
+}
+
+impl CombatStats {
+    fn new(health: i32, attack: i32) -> Self {
+        Self {
+            health,
+            attack,
+        }
+    }
+}
 
 fn main() {
-    let mut map1 = HashMap::new();
-    map1.insert("a", 1);
-    map1.insert("b", 2);
-
-    let mut map2 = HashMap::new();
-    map2.insert("b", 2);
-    map2.insert("a", 1);
-
-    if map1 == map2 {
-        println!("Maps are equal");
-    } else {
-        println!("Maps are not equal");
-    }
+    let enemy1: EnemyType = EnemyType::Zombie(CombatStats::new(34,45));
+    println!("enemy1: {:#?}", enemy1);
 }
