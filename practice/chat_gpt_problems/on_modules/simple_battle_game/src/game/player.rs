@@ -1,4 +1,4 @@
-use crate::game::combat::{CombatStats};
+use crate::game::combat::CombatStats;
 
 pub struct Player {
     pub name: String,
@@ -9,7 +9,7 @@ impl Player {
     pub fn new(name: String, combat_status: CombatStats) -> Self {
         Self {
             name,
-            combat_status
+            combat_status,
         }
     }
 

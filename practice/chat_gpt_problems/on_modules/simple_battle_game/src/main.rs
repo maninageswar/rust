@@ -2,13 +2,10 @@
 
 mod game;
 
-use game::{player::*, combat::*, enemy::*};
+use game::{combat::*, enemy::*, player::*};
 
 fn main() {
-    let mut player1: Player = Player::new(
-        String::from("nathan"),
-        CombatStats::new(100, 25)
-    );
+    let mut player1: Player = Player::new(String::from("nathan"), CombatStats::new(100, 25));
 
     let mut zombie: EnemyType = EnemyType::Zombie(CombatStats::new(50, 10));
     let mut skeleton: EnemyType = EnemyType::Skeleton(CombatStats::new(40, 15));

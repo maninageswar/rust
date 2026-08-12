@@ -1,4 +1,4 @@
-use crate::game::combat::{CombatStats};
+use crate::game::combat::CombatStats;
 
 #[derive(Debug)]
 pub enum EnemyType {
@@ -10,8 +10,8 @@ impl EnemyType {
     pub fn is_alive(&self) -> bool {
         match self {
             EnemyType::Zombie(combat_status) | EnemyType::Skeleton(combat_status) => {
-            combat_status.is_character_alive()
-        }
+                combat_status.is_character_alive()
+            }
         }
     }
 }

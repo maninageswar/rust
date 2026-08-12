@@ -33,10 +33,10 @@ fn main() {
     laptop_rental_shop1.list_all_equipments();
 
     // here in below expression laptop_rental_shop1 is borrowed immutabaly 
-    match laptop_rental_shop1.some_test(1, &customer1, Duration::from_secs((3 * 3600) + (2 * 60) + 7)) {
-        Some(rental_record) => laptop_rental_history1.add_rental_record(rental_record),
-        None => ()
-    }
+    // match laptop_rental_shop1.some_test(1, &customer1, Duration::from_secs((3 * 3600) + (2 * 60) + 7)) {
+    //     Some(rental_record) => laptop_rental_history1.add_rental_record(rental_record),
+    //     None => ()
+    // }
 
     /*
     important learning
@@ -61,10 +61,10 @@ fn main() {
     */
 
     // here in below expression laptop_rental_shop1 is borrowed mutabaly 
-    // match laptop_rental_shop1.rent_equipment(1, &customer1, Duration::from_secs((3 * 3600) + (2 * 60) + 7)) {
-    //     Some(rental_record) => laptop_rental_history1.add_rental_record(rental_record),
-    //     None => ()
-    // }
+    match laptop_rental_shop1.rent_equipment(1, &customer1, Duration::from_secs((3 * 3600) + (2 * 60) + 7)) {
+        Some(rental_record) => laptop_rental_history1.add_rental_record(rental_record),
+        None => ()
+    }
 
 
     println!("\nafter renting laptop");
