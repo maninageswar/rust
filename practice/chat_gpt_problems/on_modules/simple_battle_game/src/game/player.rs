@@ -6,10 +6,14 @@ pub struct Player {
 }
 
 impl Player {
-    fn new(name: String, combat_status: CombatStats) -> Self {
+    pub fn new(name: String, combat_status: CombatStats) -> Self {
         Self {
             name,
             combat_status
         }
+    }
+
+    pub fn is_alive(&self) -> bool {
+        self.combat_status.is_character_alive()
     }
 }

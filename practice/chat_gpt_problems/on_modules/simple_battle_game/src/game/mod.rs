@@ -1,3 +1,3 @@
-mod player;
-mod combat;
-mod enemy;
+pub mod player;
+pub mod combat;
+pub mod enemy;
