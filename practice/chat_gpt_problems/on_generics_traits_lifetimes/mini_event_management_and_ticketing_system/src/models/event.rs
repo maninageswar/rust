@@ -1,5 +1,7 @@
 use std::time::Duration;
 use crate::traits::{identifiable::Identifiable, registrable::Registrable};
+use crate::registration::record::RegistrationRecord;
+use super::attendee::Attendee;
 
 #[derive(Debug)]
 pub struct Conference {
@@ -44,7 +46,6 @@ impl Identifiable for Conference {
 
     To fix the error, simply remove the pub keyword from the get_id method inside the impl Identifiable for Conference block.
     */
-
     // if you use the visibility modifier "pub" for the below method you will get the above error 
     fn get_id(&self) -> u32 {
         self.id
@@ -52,19 +53,23 @@ impl Identifiable for Conference {
 }
 
 impl Registrable for Conference {
-    fn register(&mut self) -> String {
+    fn register<'a, 'b>(&'a mut self, registration_history_length: usize, attendee: &'b Attendee) -> Option<RegistrationRecord<'a, 'b, Self>> {
         if self.capacity > self.registered_count {
             self.registered_count += 1;
-            registration_successful()
+            let registration_record: RegistrationRecord<'a, 'b, Self> = RegistrationRecord::new(registration_history_length+1, self, attendee, String::from("registration_date"));
+            registration_successful();
+            Some(registration_record)
         } else {
-            registration_un_successful()
+            registration_un_successful();
+            None
         }
         
     }
 
-    fn un_register(&mut self) -> String {
+    fn un_register(&mut self, id: u32) -> String {
         self.registered_count -= 1;
         un_registration_successful()
+        // TODO: delete the registration record from the registration history 
     }
 
     fn is_registration_available(&self) -> bool {
@@ -76,111 +81,111 @@ impl Registrable for Conference {
     }
 }
 
-#[derive(Debug)]
-pub struct Workshop {
-    id: u32,
-    name: String,
-    instructor: String,
-    capacity: usize,
-    registered_count: usize,
-}
+// #[derive(Debug)]
+// pub struct Workshop {
+//     id: u32,
+//     name: String,
+//     instructor: String,
+//     capacity: usize,
+//     registered_count: usize,
+// }
 
-impl Workshop {
-    pub fn new(id: u32, name: String, instructor: String, capacity: usize, registered_count: usize) -> Self {
-        Self {
-            id,
-            name,
-            instructor,
-            capacity,
-            registered_count,
-        }
-    }
-}
+// impl Workshop {
+//     pub fn new(id: u32, name: String, instructor: String, capacity: usize, registered_count: usize) -> Self {
+//         Self {
+//             id,
+//             name,
+//             instructor,
+//             capacity,
+//             registered_count,
+//         }
+//     }
+// }
 
-impl Identifiable for Workshop {
-    fn get_id(&self) -> u32 {
-        self.id
-    }
-}
+// impl Identifiable for Workshop {
+//     fn get_id(&self) -> u32 {
+//         self.id
+//     }
+// }
 
-impl Registrable for Workshop {
-    fn register(&mut self) -> String {
-        if self.capacity > self.registered_count {
-            self.registered_count += 1;
-            registration_successful()
-        } else {
-            registration_un_successful()
-        }
+// impl Registrable for Workshop {
+//     fn register(&mut self) -> String {
+//         if self.capacity > self.registered_count {
+//             self.registered_count += 1;
+//             registration_successful()
+//         } else {
+//             registration_un_successful()
+//         }
         
-    }
+//     }
 
-    fn un_register(&mut self) -> String {
-        self.registered_count -= 1;
-        un_registration_successful()
-    }
+//     fn un_register(&mut self) -> String {
+//         self.registered_count -= 1;
+//         un_registration_successful()
+//     }
 
-    fn is_registration_available(&self) -> bool {
-        self.capacity > self.registered_count
-    }
+//     fn is_registration_available(&self) -> bool {
+//         self.capacity > self.registered_count
+//     }
 
-    fn capacity(&self) -> usize {
-        self.capacity
-    }
-}
+//     fn capacity(&self) -> usize {
+//         self.capacity
+//     }
+// }
 
-#[derive(Debug)]
-pub struct Concert {
-    id: u32,
-    name: String,
-    artist: String,
-    duration: Duration,
-    capacity: usize,
-    registered_count: usize,
-}
+// #[derive(Debug)]
+// pub struct Concert {
+//     id: u32,
+//     name: String,
+//     artist: String,
+//     duration: Duration,
+//     capacity: usize,
+//     registered_count: usize,
+// }
 
-impl Concert {
-    pub fn new(id: u32, name: String, artist: String, duration: Duration, capacity: usize, registered_count: usize) -> Self {
-        Self {
-            id,
-            name,
-            artist,
-            duration,
-            capacity,
-            registered_count,
-        }
-    }
-}
+// impl Concert {
+//     pub fn new(id: u32, name: String, artist: String, duration: Duration, capacity: usize, registered_count: usize) -> Self {
+//         Self {
+//             id,
+//             name,
+//             artist,
+//             duration,
+//             capacity,
+//             registered_count,
+//         }
+//     }
+// }
 
-impl Identifiable for Concert {
-    fn get_id(&self) -> u32 {
-        self.id
-    }
-}
+// impl Identifiable for Concert {
+//     fn get_id(&self) -> u32 {
+//         self.id
+//     }
+// }
 
-impl Registrable for Concert {
-    fn register(&mut self) -> String {
-        if self.capacity > self.registered_count {
-            self.registered_count += 1;
-            registration_successful()
-        } else {
-            registration_un_successful()
-        }
+// impl Registrable for Concert {
+//     fn register(&mut self) -> String {
+//         if self.capacity > self.registered_count {
+//             self.registered_count += 1;
+//             registration_successful()
+//         } else {
+//             registration_un_successful()
+//         }
         
-    }
+//     }
 
-    fn un_register(&mut self) -> String {
-        self.registered_count -= 1;
-        un_registration_successful()
-    }
+//     fn un_register(&mut self) -> String {
+//         self.registered_count -= 1;
+//         un_registration_successful()
+//     }
 
-    fn is_registration_available(&self) -> bool {
-        self.capacity > self.registered_count
-    }
+//     fn is_registration_available(&self) -> bool {
+//         self.capacity > self.registered_count
+//     }
 
-    fn capacity(&self) -> usize {
-        self.capacity
-    }
-}
+//     fn capacity(&self) -> usize {
+//         self.capacity
+//     }
+// }
 
 #[derive(Debug)]
 pub enum Event {
@@ -190,12 +195,12 @@ pub enum Event {
 }
 
 
-fn registration_successful() -> String {
-    format!("your registration is successful")
+fn registration_successful() {
+    println!("your registration is successful")
 }
 
-fn registration_un_successful() -> String {
-    format!("sorry the maximum capacity for this event has been reached so, your registration is un successful")
+fn registration_un_successful() {
+    println!("sorry the maximum capacity for this event has been reached so, your registration is un successful")
 }
 
 fn un_registration_successful() -> String {
