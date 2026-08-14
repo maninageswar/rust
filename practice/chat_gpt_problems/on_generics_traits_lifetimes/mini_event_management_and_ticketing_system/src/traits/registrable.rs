@@ -1,5 +1,5 @@
-use crate::registration::record::RegistrationRecord;
 use crate::models::attendee::Attendee;
+use crate::registration::record::RegistrationRecord;
 
 pub trait Registrable: Sized {
     fn register<'a, 'b>(&'a mut self, registration_history_length: usize, attendee: &'b Attendee) -> Option<RegistrationRecord<'a, 'b, Self>>;

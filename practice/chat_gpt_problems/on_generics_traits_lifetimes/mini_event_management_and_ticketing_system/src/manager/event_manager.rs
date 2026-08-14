@@ -6,7 +6,7 @@ pub struct EventManager<T> {
     events: Vec<T>,
 }
 
-impl <T: Identifiable + std::fmt::Debug> EventManager<T> {
+impl<T: Identifiable + std::fmt::Debug> EventManager<T> {
     pub fn new(company: String) -> Self {
         Self {
             company,

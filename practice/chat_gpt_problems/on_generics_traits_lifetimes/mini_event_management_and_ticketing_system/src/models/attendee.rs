@@ -1,5 +1,5 @@
-use crate::traits::{registrable::Registrable, identifiable::Identifiable};
 use crate::registration::record::RegistrationRecord;
+use crate::traits::{identifiable::Identifiable, registrable::Registrable};
 
 #[derive(Debug)]
 pub struct Attendee {

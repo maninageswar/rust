@@ -1,2 +1,2 @@
-pub mod event;
 pub mod attendee;
+pub mod event;

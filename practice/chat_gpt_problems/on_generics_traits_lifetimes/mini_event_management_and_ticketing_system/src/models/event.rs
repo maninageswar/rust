@@ -1,7 +1,7 @@
-use std::time::Duration;
-use crate::traits::{identifiable::Identifiable, registrable::Registrable};
-use crate::registration::record::RegistrationRecord;
 use super::attendee::Attendee;
+use crate::registration::record::RegistrationRecord;
+use crate::traits::{identifiable::Identifiable, registrable::Registrable};
+use std::time::Duration;
 
 #[derive(Debug)]
 pub struct Conference {
@@ -46,7 +46,7 @@ impl Identifiable for Conference {
 
     To fix the error, simply remove the pub keyword from the get_id method inside the impl Identifiable for Conference block.
     */
-    // if you use the visibility modifier "pub" for the below method you will get the above error 
+    // if you use the visibility modifier "pub" for the below method you will get the above error
     fn get_id(&self) -> u32 {
         self.id
     }
@@ -63,13 +63,12 @@ impl Registrable for Conference {
             registration_un_successful();
             None
         }
-        
     }
 
     fn un_register(&mut self, id: u32) -> String {
         self.registered_count -= 1;
         un_registration_successful()
-        // TODO: delete the registration record from the registration history 
+        // TODO: delete the registration record from the registration history
     }
 
     fn is_registration_available(&self) -> bool {
@@ -116,7 +115,7 @@ impl Registrable for Conference {
 //         } else {
 //             registration_un_successful()
 //         }
-        
+
 //     }
 
 //     fn un_register(&mut self) -> String {
@@ -170,7 +169,7 @@ impl Registrable for Conference {
 //         } else {
 //             registration_un_successful()
 //         }
-        
+
 //     }
 
 //     fn un_register(&mut self) -> String {
@@ -193,7 +192,6 @@ pub enum Event {
     Workshop,
     Concert,
 }
-
 
 fn registration_successful() {
     println!("your registration is successful")
