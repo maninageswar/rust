@@ -1,7 +1,7 @@
 use super::attendee::Attendee;
-use crate::registration::record::RegistrationRecord;
+use crate::registration::record::{RegistrationRecord, RegistrationError};
 use crate::traits::{identifiable::Identifiable, registrable::Registrable};
-use std::time::Duration;
+use std::{time::Duration, cell::Cell};
 
 #[derive(Debug)]
 pub struct Conference {
@@ -10,7 +10,8 @@ pub struct Conference {
     speaker: String,
     duration: Duration,
     capacity: usize,
-    registered_count: usize,
+    // Explination !important : if you to understand why i use Cell type just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
+    registered_count: Cell<usize>,
 }
 
 impl Conference {
@@ -21,7 +22,7 @@ impl Conference {
             speaker,
             duration,
             capacity,
-            registered_count,
+            registered_count: Cell::new(registered_count),
         }
     }
 }
@@ -53,26 +54,29 @@ impl Identifiable for Conference {
 }
 
 impl Registrable for Conference {
-    fn register<'a, 'b>(&'a mut self, registration_history_length: usize, attendee: &'b Attendee) -> Option<RegistrationRecord<'a, 'b, Self>> {
-        if self.capacity > self.registered_count {
-            self.registered_count += 1;
-            let registration_record: RegistrationRecord<'a, 'b, Self> = RegistrationRecord::new(registration_history_length+1, self, attendee, String::from("registration_date"));
-            registration_successful();
-            Some(registration_record)
+    fn register<'a, 'b>(&'a self, registration_history_length: usize, attendee: &'b Attendee) -> Result<RegistrationRecord<'a, 'b, Self>, RegistrationError> {
+        // Explination !important : if you to understand why i use Cell type which uses get to access the registered_count value just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
+        let current_count = self.registered_count.get();
+        if self.capacity > current_count {
+            self.registered_count.set(current_count + 1); 
+            let registration_record: RegistrationRecord<'a, 'b, Self> = RegistrationRecord::new(registration_history_length + 1, self, attendee, String::from("registration_date"));
+            Ok(registration_record)
         } else {
-            registration_un_successful();
-            None
+            Err(RegistrationError::CapacityReached)
         }
     }
 
     fn un_register(&mut self, id: u32) -> String {
-        self.registered_count -= 1;
+        let current_count = self.registered_count.get();
+        if current_count > 0 {
+            self.registered_count.set(current_count - 1);
+        }
         un_registration_successful()
         // TODO: delete the registration record from the registration history
     }
 
     fn is_registration_available(&self) -> bool {
-        self.capacity > self.registered_count
+        self.capacity > self.registered_count.get()
     }
 
     fn capacity(&self) -> usize {
@@ -80,111 +84,123 @@ impl Registrable for Conference {
     }
 }
 
-// #[derive(Debug)]
-// pub struct Workshop {
-//     id: u32,
-//     name: String,
-//     instructor: String,
-//     capacity: usize,
-//     registered_count: usize,
-// }
+#[derive(Debug)]
+pub struct Workshop {
+    id: u32,
+    name: String,
+    instructor: String,
+    capacity: usize,
+    registered_count: Cell<usize>,
+}
 
-// impl Workshop {
-//     pub fn new(id: u32, name: String, instructor: String, capacity: usize, registered_count: usize) -> Self {
-//         Self {
-//             id,
-//             name,
-//             instructor,
-//             capacity,
-//             registered_count,
-//         }
-//     }
-// }
+impl Workshop {
+    pub fn new(id: u32, name: String, instructor: String, capacity: usize, registered_count: usize) -> Self {
+        Self {
+            id,
+            name,
+            instructor,
+            capacity,
+            registered_count: Cell::new(registered_count),
+        }
+    }
+}
 
-// impl Identifiable for Workshop {
-//     fn get_id(&self) -> u32 {
-//         self.id
-//     }
-// }
+impl Identifiable for Workshop {
+    fn get_id(&self) -> u32 {
+        self.id
+    }
+}
 
-// impl Registrable for Workshop {
-//     fn register(&mut self) -> String {
-//         if self.capacity > self.registered_count {
-//             self.registered_count += 1;
-//             registration_successful()
-//         } else {
-//             registration_un_successful()
-//         }
+impl Registrable for Workshop {
+    fn register<'a, 'b>(&'a self, registration_history_length: usize, attendee: &'b Attendee) -> Result<RegistrationRecord<'a, 'b, Self>, RegistrationError> {
+        // Explination !important : if you to understand why i use Cell type which uses get to access the registered_count value just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
+        let current_count = self.registered_count.get();
+        if self.capacity > current_count {
+            self.registered_count.set(current_count + 1); 
+            let registration_record: RegistrationRecord<'a, 'b, Self> = RegistrationRecord::new(registration_history_length + 1, self, attendee, String::from("registration_date"));
+            Ok(registration_record)
+        } else {
+            Err(RegistrationError::CapacityReached)
+        }
+    }
 
-//     }
+    fn un_register(&mut self, id: u32) -> String {
+        let current_count = self.registered_count.get();
+        if current_count > 0 {
+            self.registered_count.set(current_count - 1);
+        }
+        un_registration_successful()
+        // TODO: delete the registration record from the registration history
+    }
 
-//     fn un_register(&mut self) -> String {
-//         self.registered_count -= 1;
-//         un_registration_successful()
-//     }
+    fn is_registration_available(&self) -> bool {
+        self.capacity > self.registered_count.get()
+    }
 
-//     fn is_registration_available(&self) -> bool {
-//         self.capacity > self.registered_count
-//     }
+    fn capacity(&self) -> usize {
+        self.capacity
+    }
+}
 
-//     fn capacity(&self) -> usize {
-//         self.capacity
-//     }
-// }
+#[derive(Debug)]
+pub struct Concert {
+    id: u32,
+    name: String,
+    artist: String,
+    duration: Duration,
+    capacity: usize,
+    registered_count: Cell<usize>,
+}
 
-// #[derive(Debug)]
-// pub struct Concert {
-//     id: u32,
-//     name: String,
-//     artist: String,
-//     duration: Duration,
-//     capacity: usize,
-//     registered_count: usize,
-// }
+impl Concert {
+    pub fn new(id: u32, name: String, artist: String, duration: Duration, capacity: usize, registered_count: usize) -> Self {
+        Self {
+            id,
+            name,
+            artist,
+            duration,
+            capacity,
+            registered_count: Cell::new(registered_count),
+        }
+    }
+}
 
-// impl Concert {
-//     pub fn new(id: u32, name: String, artist: String, duration: Duration, capacity: usize, registered_count: usize) -> Self {
-//         Self {
-//             id,
-//             name,
-//             artist,
-//             duration,
-//             capacity,
-//             registered_count,
-//         }
-//     }
-// }
+impl Identifiable for Concert {
+    fn get_id(&self) -> u32 {
+        self.id
+    }
+}
 
-// impl Identifiable for Concert {
-//     fn get_id(&self) -> u32 {
-//         self.id
-//     }
-// }
+impl Registrable for Concert {
+    fn register<'a, 'b>(&'a self, registration_history_length: usize, attendee: &'b Attendee) -> Result<RegistrationRecord<'a, 'b, Self>, RegistrationError> {
+        // Explination !important : if you to understand why i use Cell type which uses get to access the registered_count value just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
+        let current_count = self.registered_count.get();
+        if self.capacity > current_count {
+            self.registered_count.set(current_count + 1); 
+            let registration_record: RegistrationRecord<'a, 'b, Self> = RegistrationRecord::new(registration_history_length + 1, self, attendee, String::from("registration_date"));
+            Ok(registration_record)
+        } else {
+            Err(RegistrationError::CapacityReached)
+        }
+    }
 
-// impl Registrable for Concert {
-//     fn register(&mut self) -> String {
-//         if self.capacity > self.registered_count {
-//             self.registered_count += 1;
-//             registration_successful()
-//         } else {
-//             registration_un_successful()
-//         }
+    fn un_register(&mut self, id: u32) -> String {
+        let current_count = self.registered_count.get();
+        if current_count > 0 {
+            self.registered_count.set(current_count - 1);
+        }
+        un_registration_successful()
+        // TODO: delete the registration record from the registration history
+    }
 
-//     }
+    fn is_registration_available(&self) -> bool {
+        self.capacity > self.registered_count.get()
+    }
 
-//     fn un_register(&mut self) -> String {
-//         self.registered_count -= 1;
-//         un_registration_successful()
-//     }
-
-//     fn is_registration_available(&self) -> bool {
-//         self.capacity > self.registered_count
-//     }
-
-//     fn capacity(&self) -> usize {
-//         self.capacity
-//     }
-// }
+    fn capacity(&self) -> usize {
+        self.capacity
+    }
+}
 
 #[derive(Debug)]
 pub enum Event {

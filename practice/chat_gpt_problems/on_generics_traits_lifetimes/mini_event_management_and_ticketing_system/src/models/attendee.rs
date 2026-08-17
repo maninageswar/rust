@@ -1,5 +1,6 @@
 use crate::registration::record::RegistrationRecord;
 use crate::traits::{identifiable::Identifiable, registrable::Registrable};
+use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct Attendee {
@@ -21,7 +22,17 @@ impl Identifiable for Attendee {
 }
 
 #[derive(Debug)]
-pub struct AttendeeHistory<'a, 'b, T: Registrable> {
+pub struct AttendeeHistory<'a, 'b, 'c, T: Registrable> {
     pub attendee: &'b Attendee,
-    pub registrations: Vec<&'a RegistrationRecord<'a, 'b, T>>,
+    pub registrations: Vec<&'c RegistrationRecord<'a, 'b, T>>,
+}
+
+impl<'a, 'b, 'c, T: Registrable + Debug> AttendeeHistory<'a, 'b, 'c, T> {
+    pub fn total_registrations(&self) -> usize {
+        self.registrations.len()
+    }
+
+    pub fn display_registrations(&self) {
+        println!("Attendee Registrations: {:#?}", self.registrations)
+    }
 }

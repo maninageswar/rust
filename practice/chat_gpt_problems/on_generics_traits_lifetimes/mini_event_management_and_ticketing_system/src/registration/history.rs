@@ -6,8 +6,8 @@ use crate::traits::{identifiable::Identifiable, registrable::Registrable};
 
 #[derive(Debug)]
 pub struct RegistrationHistory<'a, 'b, T: Registrable> {
-    event_type: Event,
-    registration_history: Vec<RegistrationRecord<'a, 'b, T>>,
+    pub event_type: Event,
+    pub registration_history: Vec<RegistrationRecord<'a, 'b, T>>,
 }
 
 impl<'a, 'b, T: Registrable + Identifiable + Debug> RegistrationHistory<'a, 'b, T> {

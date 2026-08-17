@@ -19,3 +19,8 @@ impl<'a, 'b, T: Registrable> RegistrationRecord<'a, 'b, T> {
         }
     }
 }
+
+#[derive(Debug)]
+pub enum RegistrationError {
+    CapacityReached,
+}
