@@ -1120,28 +1120,60 @@
 //     }
 // }
 
-#[derive(Debug)]
-struct CombatStats {
-    health: i32,
-    attack: i32,
+// #[derive(Debug)]
+// struct CombatStats {
+//     health: i32,
+//     attack: i32,
+// }
+
+// #[derive(Debug)]
+// enum EnemyType {
+//     Zombie(CombatStats),
+//     Skeleton(CombatStats),
+// }
+
+// impl CombatStats {
+//     fn new(health: i32, attack: i32) -> Self {
+//         Self {
+//             health,
+//             attack,
+//         }
+//     }
+// }
+
+// fn main() {
+//     let enemy1: EnemyType = EnemyType::Zombie(CombatStats::new(34,45));
+//     println!("enemy1: {:#?}", enemy1);
+// }
+
+// fn main() {
+//     let r;
+
+//     {
+//         let x = 5;
+//         r = &x;
+//         println!("r: {:r}");
+//     }
+
+//     // println!("r: {r}");
+// }
+
+// Definition (uses 'a)
+struct Wrapper<'a> {
+    text: &'a str,
 }
 
-#[derive(Debug)]
-enum EnemyType {
-    Zombie(CombatStats),
-    Skeleton(CombatStats),
-}
-
-impl CombatStats {
-    fn new(health: i32, attack: i32) -> Self {
-        Self {
-            health,
-            attack,
-        }
-    }
+fn print_wrapper(w: Wrapper) { 
+    println!("{}", w.text);
 }
 
 fn main() {
-    let enemy1: EnemyType = EnemyType::Zombie(CombatStats::new(34,45));
-    println!("enemy1: {:#?}", enemy1);
+    let my_string = String::from("Hello");
+    
+    // Usage (uses '_). 
+    // We don't name the lifetime; the compiler looks at `my_string` 
+    // and figures out exactly how long it lives automatically.
+    let my_wrapper: Wrapper = Wrapper { text: &my_string };
+    print_wrapper(my_wrapper);
 }
+
