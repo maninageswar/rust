@@ -1159,21 +1159,66 @@
 // }
 
 // Definition (uses 'a)
-struct Wrapper<'a> {
-    text: &'a str,
-}
+// struct Wrapper<'a> {
+//     text: &'a str,
+// }
 
-fn print_wrapper(w: Wrapper) { 
-    println!("{}", w.text);
+// fn print_wrapper(w: Wrapper) { 
+//     println!("{}", w.text);
+// }
+
+// fn main() {
+//     let my_string = String::from("Hello");
+    
+//     // Usage (uses '_). 
+//     // We don't name the lifetime; the compiler looks at `my_string` 
+//     // and figures out exactly how long it lives automatically.
+//     let my_wrapper: Wrapper = Wrapper { text: &my_string };
+//     print_wrapper(my_wrapper);
+// }
+
+// fn main() {
+//     let example_closure = |x| x;
+//     let s = example_closure(String::from("hello"));
+//     let n = example_closure(5);
+// }
+
+// fn main() {
+//     let mut list = vec![1, 2, 3];
+//     println!("Before defining closure: {list:?}");
+//     let mut borrows_mutably = || list.push(7);
+//     println!("before calling closure: {list:?}");
+//     borrows_mutably();
+//     println!("After calling closure: {list:?}");
+// }
+
+// use std::thread;
+
+// fn main() {
+//     let list = vec![1, 2, 3];
+//     println!("Before defining closure: {list:?}");
+//     thread::spawn(|| println!("From thread: {list:?}"))
+//     .join()
+//     .unwrap();
+// }
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
 
 fn main() {
-    let my_string = String::from("Hello");
-    
-    // Usage (uses '_). 
-    // We don't name the lifetime; the compiler looks at `my_string` 
-    // and figures out exactly how long it lives automatically.
-    let my_wrapper: Wrapper = Wrapper { text: &my_string };
-    print_wrapper(my_wrapper);
+    let mut list = [
+        Rectangle { width: 10, height: 1 },
+        Rectangle { width: 3, height: 5 },
+        Rectangle { width: 7, height: 12 },
+    ];
+    let mut sort_operations = vec![];
+    let value = String::from("closure called");
+    list.sort_by_key(|r| {
+        sort_operations.push(value);
+        r.width
+    });
+    println!("{list:#?}");
 }
-
