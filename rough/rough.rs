@@ -1202,23 +1202,55 @@
 //     .unwrap();
 // }
 
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
+// #[derive(Debug)]
+// struct Rectangle {
+//     width: u32,
+//     height: u32,
+// }
+
+// fn main() {
+//     let mut list = [
+//         Rectangle { width: 10, height: 1 },
+//         Rectangle { width: 3, height: 5 },
+//         Rectangle { width: 7, height: 12 },
+//     ];
+//     let mut sort_operations = vec![];
+//     let value = String::from("closure called");
+//     list.sort_by_key(|r| {
+//         sort_operations.push(value);
+//         r.width
+//     });
+//     println!("{list:#?}");
+// }
+
+// fn main() {
+//     let v1 = vec![1, 2, 3];
+//     let v1_iter = v1.iter();
+//     // for val in v1_iter {
+//     //     println!("the val is {}", val);
+//     // }
+//     println!("{:?}",v1_iter);
+// }
+
+// fn main() {
+//     let v1 = vec![1, 2, 3];
+
+//     let v1_iter = v1.iter();
+
+//     let total: i32 = v1_iter.sum();
+
+//     println!("{}", total);
+//     println!("{:?}", v1_iter);
+// }
+
+// fn main() {
+//     let v1: Vec<i32> = vec![1, 2, 3];
+//     let v2: Vec<i32> = v1.iter().map(|x| x + 1).collect();
+//     println!("{:?}", v2);
+// }
 
 fn main() {
-    let mut list = [
-        Rectangle { width: 10, height: 1 },
-        Rectangle { width: 3, height: 5 },
-        Rectangle { width: 7, height: 12 },
-    ];
-    let mut sort_operations = vec![];
-    let value = String::from("closure called");
-    list.sort_by_key(|r| {
-        sort_operations.push(value);
-        r.width
-    });
-    println!("{list:#?}");
+    let v1: Vec<i32> = vec![1, 2, 3, 4, 5];
+    let result: Vec<i32> = v1.iter().map(|x| x * 2).filter(|x| x > &5).collect();
+    println!("{:?}", result);
 }
