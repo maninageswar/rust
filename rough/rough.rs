@@ -1249,8 +1249,13 @@
 //     println!("{:?}", v2);
 // }
 
+// fn main() {
+//     let v1: Vec<i32> = vec![1, 2, 3, 4, 5];
+//     let result: Vec<i32> = v1.iter().map(|x| x * 2).filter(|x| x > &5).collect();
+//     println!("{:?}", result);
+// }
+
 fn main() {
-    let v1: Vec<i32> = vec![1, 2, 3, 4, 5];
-    let result: Vec<i32> = v1.iter().map(|x| x * 2).filter(|x| x > &5).collect();
-    println!("{:?}", result);
+    let b = Box::new(5);
+    println!("b = {b}");
 }

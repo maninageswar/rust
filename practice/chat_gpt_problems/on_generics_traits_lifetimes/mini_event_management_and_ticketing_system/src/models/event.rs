@@ -10,7 +10,7 @@ pub struct Conference {
     speaker: String,
     duration: Duration,
     capacity: usize,
-    // Explination !important : if you to understand why i use Cell type just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
+    // Explination !important : if you want to understand why i use Cell type just go through the explination at learnings_and_error_explinations/understand_why_and_how_to_use_Cell_type.md
     registered_count: Cell<usize>,
 }
 
