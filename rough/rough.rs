@@ -1373,9 +1373,20 @@
 //     println!("{:?}", *y);
 // }
 
+// fn main() {
+//     let mut x: i32 = 5;
+//     let y = &mut x;
+//     *y+=5;
+//     println!("{y}");
+// }
+
+use std::rc::Rc;
+use std::thread;
+
 fn main() {
-    let mut x: i32 = 5;
-    let y = &mut x;
-    *y+=5;
-    println!("{y}");
+    let data = Rc::new(String::from("hello"));
+
+    thread::spawn(move || {
+        println!("{}", data);
+    });
 }
