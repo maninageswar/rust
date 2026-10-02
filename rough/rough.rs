@@ -1380,13 +1380,27 @@
 //     println!("{y}");
 // }
 
-use std::rc::Rc;
-use std::thread;
+// use std::rc::Rc;
+// use std::thread;
+
+// fn main() {
+//     let data = Rc::new(String::from("hello"));
+
+//     thread::spawn(move || {
+//         println!("{}", data);
+//     });
+// }
+
+fn add_two(num: i32) -> i32 { num + 2 }
+
+fn add_greatings(mut name: String ) -> String { 
+    name.push_str(", Good Morning");
+    return name;
+}
 
 fn main() {
-    let data = Rc::new(String::from("hello"));
-
-    thread::spawn(move || {
-        println!("{}", data);
-    });
+    let num: i32 = 0;
+    let name: String = String::from("sai");
+    println!("the name with greetings is {}", add_greatings(name));
+    println!("the number is {}", add_two(num));
 }
