@@ -1391,16 +1391,83 @@
 //     });
 // }
 
-fn add_two(num: i32) -> i32 { num + 2 }
+// fn add_two(num: i32) -> i32 { num + 2 }
 
-fn add_greatings(mut name: String ) -> String { 
-    name.push_str(", Good Morning");
-    return name;
+// fn add_greatings(mut name: String ) -> String { 
+//     name.push_str(", Good Morning");
+//     return name;
+// }
+
+// fn main() {
+//     let num: i32 = 0;
+//     let name: String = String::from("sai");
+//     println!("the name with greetings is {}", add_greatings(name));
+//     println!("the number is {}", add_two(num));
+// }
+
+// fn main() {
+//     let a = Box::new(5);
+//     let b = &a;
+//     println!("a = {a}");
+//     println!("b = {b}");
+// }
+
+// enum List<'a> {
+//     Cons(i32, Box<&'a List<'a>>),
+//     Nil,
+// }
+
+// use crate::List::{Cons, Nil};
+
+// fn main() {
+//     let a = Cons(5, Box::new(&Cons(10, Box::new(&Nil))));
+//     let b = Cons(3, Box::new(&a));
+//     let c = Cons(4, Box::new(&a));
+// }
+
+// fn main() {
+//     let mut a = Box::new(5);
+//     *a = *a + 7;
+//     println!("b is {}", a);
+// }
+
+// use std::sync::{Arc, Mutex};
+// use std::thread;
+// use std::time::Duration;
+
+// fn main() {
+//     let data = Arc::new(Mutex::new(10));
+//     println!("data in main thread {:?}", data);
+
+//     let data1 = Arc::clone(&data);
+//     let data2 = Arc::clone(&data);
+
+//     let t1 = thread::spawn(move || {
+//         let mut guard = data1.lock().unwrap();
+//         println!("Thread 1 got the lock");
+//         *guard += 1;
+//         println!("Thread 1 incremented the value to {}", *guard);
+//         thread::sleep(Duration::from_secs(5));
+//         println!("Thread 1 releases the lock");
+//     });
+
+//     let t2 = thread::spawn(move || {
+//         println!("Thread 2 trying to get the lock...");
+//         let mut guard = data2.lock().unwrap();
+//         println!("Thread 2 got the lock!");
+//         println!("data in thread 2 before incrementing: {}", *guard);
+//         *guard += 1;
+//         println!("Thread 2 incremented the value to {}", *guard);
+//     });
+
+//     t1.join().unwrap();
+//     t2.join().unwrap();
+// }
+
+async fn hello() {
+    println!("Hello");
 }
 
 fn main() {
-    let num: i32 = 0;
-    let name: String = String::from("sai");
-    println!("the name with greetings is {}", add_greatings(name));
-    println!("the number is {}", add_two(num));
+    let future = hello();
 }
