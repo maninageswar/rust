@@ -1464,10 +1464,12 @@
 //     t2.join().unwrap();
 // }
 
-async fn hello() {
-    println!("Hello");
-}
+// async fn hello() {
+//     println!("Hello");
+// }
 
 fn main() {
-    let future = hello();
+    println!("Hello");
+    println!("World");
+    println!("!");
 }
