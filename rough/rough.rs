@@ -1468,8 +1468,164 @@
 //     println!("Hello");
 // }
 
+// fn main() {
+//     println!("Hello");
+//     println!("World");
+//     println!("!");
+// }
+
+// fn main() {
+//     let (x, y, _) = (1, 2, 3);
+//     println!("{}",x);
+// }
+
+// fn main() {
+//     let favorite_color: Option<&str> = None;
+//     let is_tuesday = false;
+//     let age: Result<u8, _> =  "".parse();
+
+//     if false {
+//         println!("Using your favorite color, as the background");
+//     } else if is_tuesday {
+//         println!("Tuesday is green day!");
+//     } else if let Ok(age) = age {
+//         if age > 60 {
+//             println!("Using purple as the background color");
+//         } else {
+//             println!("Using orange as the background color");
+//         }
+//     } 
+
+    // if let Err(error_type) = age {
+    //     println!("{:?}", error_type)
+    // }
+
+    // println!("{:?}", age)
+// }
+
+// use std::sync::mpsc;
+// use std::thread;
+
+// fn main() {
+//     let (tx, rx) = mpsc::channel();
+
+//     thread::spawn(move || {
+//         let val = String::from("hi");
+//         tx.send(val).unwrap();
+//     });
+
+//     let received = rx.recv();
+//     println!("Got: {received:?}");
+// }
+
+// fn main() {
+//     let (tx, rx) = std::sync::mpsc::channel();
+//     std::thread::spawn(move || {
+//         for val in [1, 2, 3] {
+//             tx.send(val).unwrap();
+//         }
+//     });
+
+//     while let Ok(value) = rx.recv() {
+//         println!("{value}");
+//     }
+// }
+
+
+// fn main() {
+//     let vowels: Vec<char> = vec!['a', 'e', 'i', 'o', 'u'];
+//     let mut count: i32 = -1;
+//     let vowels_enumerate: Vec<(i32, char)> = vowels.iter().map(|vowel| {
+//         count += 1;
+//         (count, *vowel)
+//     }).collect();
+
+//     println!("{:?}", vowels_enumerate);
+//     println!("{:?}", vowels);
+// }
+
+
+// fn main() {
+//     let vowels: Vec<String> = vec!["sai".to_string(), "kumar".to_string()];
+//     let mut count: i32 = -1;
+//     let vowels_enumerate: Vec<(i32, String)> = vowels.iter().map(|&vowel| {
+//         count += 1;
+//         (count, vowel)
+//     }).collect();
+
+//     println!("{:?}", vowels_enumerate);
+//     // println!("{:?}", vowels);
+// }
+
+// fn main() {
+//     let vowels: Vec<String> = vec!["sai".to_string(), "kumar".to_string()];
+//     let first_element: String = vowels[0];
+//     println!("{first_element}")
+// }
+
+// fn main() {
+//     let x = None;
+//     let y = 10;
+
+//     match x {
+//         Some(50) => println!("Got 50"),
+//         Some(y) => println!("Matched, y = {y}"),
+//         _ => println!("Default case, x = {x:?}"),
+//     }
+
+//     println!("at the end: x = {x:?}, y = {y}");
+
+// }
+
+// struct Point {
+//     x: i32,
+//     y: i32,
+// }
+
+// fn main() {
+//     let p = Point { x: 0, y: 7 };
+
+//     match p {
+//         Point { x, y: 0 } => println!("On the x axis at {x}"),
+//         Point { x: 0, y } => println!("On the y axis at {y}"),
+//         Point { x, y } => {
+//             println!("On neither axis: ({x}, {y})");
+//         }
+//     }
+// }
+
+// fn main() {
+//     let s = Some(String::from("Hello!"));
+
+//     if let Some(_s) = s {
+//         println!("found a string");
+//     }
+
+//     // println!("{s:?}");
+
+// }
+
+// struct Point {
+//     x: i32,
+//     y: i32,
+//     z: i32,
+// }
+
+// fn main() {
+//     let origin = Point { x: 1, y: 2, z: 3 };
+
+//     match origin {
+//         Point { x: a, z: c, .. } => println!("x is {a} and z is {c}"),
+//     }
+// }
+
 fn main() {
-    println!("Hello");
-    println!("World");
-    println!("!");
+    let num = Some(4);
+
+    match num {
+        Some(x) if x % 2 == 0 => println!("The number {x} is even"),
+        Some(x) => println!("The number {x} is odd"),
+        None => (),
+    }
+
 }
