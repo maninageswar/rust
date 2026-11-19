@@ -10,12 +10,12 @@ I decided to learn Rust primarily through reading resources rather than video co
 
 ## 💬 Rust Q&A Chats with chat GPT by Chapter
 
-| Chapters | | | |
-| --- | --- | --- | --- |
-| [Chapter 1 to 6](https://chatgpt.com/c/6980b063-4dc8-8321-b9d9-da07974988d3) | [Chapter 7](https://chatgpt.com/c/69e46736-3e9c-8320-8f57-91fda211047d) | [Chapter 10[2]](https://chatgpt.com/c/6a19320b-eef4-8321-a89b-0983bc489612) | [Chapter 15](https://chatgpt.com/c/6a997419-4db8-83ee-a3d0-1ee63da7388e) |
+| Chapters | | | | |
+| --- | --- | --- | --- | --- |
+| [Chapter 1 to 6](https://chatgpt.com/c/6980b063-4dc8-8321-b9d9-da07974988d3) | [Chapter 7](https://chatgpt.com/c/69e46736-3e9c-8320-8f57-91fda211047d) | [Chapter 10[2]](https://chatgpt.com/c/6a19320b-eef4-8321-a89b-0983bc489612) | [Chapter 15](https://chatgpt.com/c/6a997419-4db8-83ee-a3d0-1ee63da7388e) | [Chapter 20](https://chatgpt.com/c/6af81dde-5314-83ec-aa1d-1e49c6dd50bf) |
 | [Chapter 2 to 6](https://chatgpt.com/c/69cb3c7d-78e4-8324-8c83-28c76d07aa7f) | [Chapter 8](https://chatgpt.com/c/69eb080d-17cc-8323-9a7e-74ba1c9aa5ea) | [Chapter 11](https://chatgpt.com/c/6a55bc21-b940-83ee-a8d6-459db00ac288) | [Chapter 16](https://chatgpt.com/c/6aaa010e-30b4-83e8-9874-973b0d76b378) |
 | [Chapter 3 to 6](https://chatgpt.com/c/69d494a0-df54-8321-872b-7d1afd891e7c) | [Chapter 9](https://chatgpt.com/c/69fc29fb-1a70-8321-a865-e9562534f6e0) | [Chapter 12](https://chatgpt.com/c/6a59c51e-1040-83ee-9798-84a6c819f33e) | [Chapter 17](https://chatgpt.com/c/6ac4a195-91e8-83e8-9eb1-2f0351c00884) |
-| [Chapter 4 to 6](https://chatgpt.com/c/69d4b13f-3270-8321-b2ce-9c1cc774f27a) | [recap 1 to 9](https://chatgpt.com/c/6a0738a5-adcc-8320-ac73-7edc9324d2f0) | [Chapter 13](https://chatgpt.com/c/6a5f41f4-0094-83ee-a04f-4bef30e2d403) | [Chapter 18 completed in windows] |
+| [Chapter 4 to 6](https://chatgpt.com/c/69d4b13f-3270-8321-b2ce-9c1cc774f27a) | [recap 1 to 9](https://chatgpt.com/c/6a0738a5-adcc-8320-ac73-7edc9324d2f0) | [Chapter 13](https://chatgpt.com/c/6a5f41f4-0094-83ee-a04f-4bef30e2d403) | [Chapter 18] |
 | [Chapter 5 to 6](https://chatgpt.com/c/69dfad84-95ac-8320-9da0-8993b22f2974) | [Chapter 10[1]](https://chatgpt.com/c/6a108418-2750-8322-a73f-3e7866425b76) | [Chapter 14](https://chatgpt.com/c/6a992ed4-aba4-83e8-bd15-cda34389e02e) | [Chapter 19](https://chatgpt.com/c/6af5ad82-0634-83ee-83c4-23c9c29ec450) |
 
 ## 🔗 Useful Rust Links
